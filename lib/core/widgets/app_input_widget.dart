@@ -5,12 +5,16 @@ class AppInput extends StatelessWidget {
   final TextEditingController controller;
   final String? hint;
   final bool obscure;
+  final Color? fillColor;
+  final Widget? prefixIcon;
 
   const AppInput({
     super.key,
     required this.controller,
     this.hint,
     this.obscure = false,
+    this.fillColor,
+    this.prefixIcon,
   });
 
   @override
@@ -18,15 +22,17 @@ class AppInput extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: obscure,
-      style: context.textStyle.bodyMedium,
+
+      style: context.textStyle.bodyLarge,
       decoration: InputDecoration(
+        prefixIcon: prefixIcon,
         hintText: hint,
-        hintStyle: context.textStyle.bodyMedium.copyWith(
+        hintStyle: context.textStyle.bodyLarge.copyWith(
           color: context.colors.onSurface.withValues(alpha: 0.6),
         ),
-        contentPadding: context.padding.md,
+        contentPadding: context.padding.lg,
         filled: true,
-        fillColor: context.colors.surfaceContainerHighest,
+        fillColor: fillColor ?? context.colors.surfaceContainerHighest,
         border: OutlineInputBorder(
           borderRadius: context.radius.mediumRadius,
           borderSide: BorderSide(color: context.colors.outline),

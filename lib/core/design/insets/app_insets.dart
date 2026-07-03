@@ -13,7 +13,7 @@ final class AppInsets {
   EdgeInsets get xl => const EdgeInsets.all(24);
 
   // Screen
-  EdgeInsets get screen => const EdgeInsets.all(16);
+  EdgeInsets get screen => const EdgeInsets.all(28);
 
   // Horizontal
   EdgeInsets get hSm => const EdgeInsets.symmetric(horizontal: 8);
