@@ -3,8 +3,8 @@ import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SingInInfo extends StatelessWidget {
-  const SingInInfo({super.key});
+class SignInInfo extends StatelessWidget {
+  const SignInInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +15,12 @@ class SingInInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset('assets/logo.png', width: 60.w, height: 60.h),
-            context.spacing.hMd,
+            context.spacing.hLg,
             AppText('DevFlow', style: context.textStyle.displaySmall),
           ],
         ),
 
-        context.spacing.vMd,
+        context.spacing.vLg,
 
         Text('Welcome back!', style: context.textStyle.headlineMedium),
         context.spacing.vSm,

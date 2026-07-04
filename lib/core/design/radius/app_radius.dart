@@ -10,11 +10,14 @@ final class AppRadius {
   static double large = 16.0;
   static double extraLarge = 24.0;
   static double huge = 30.0;
+  static double full = 99;
 
   BorderRadius get smallRadius => BorderRadius.circular(small);
   BorderRadius get mediumRadius => BorderRadius.circular(medium);
   BorderRadius get largeRadius => BorderRadius.circular(large);
   BorderRadius get extraLargeRadius => BorderRadius.circular(extraLarge);
+  BorderRadius get hugeRadius => BorderRadius.circular(huge);
+  BorderRadius get fullRadius => BorderRadius.circular(full);
 
   BorderRadius get extraLargeTopRadius => BorderRadius.only(
     topLeft: Radius.circular(huge),

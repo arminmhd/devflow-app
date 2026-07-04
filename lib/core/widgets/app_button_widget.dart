@@ -21,6 +21,7 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       height: 48.h,
       width: double.infinity,
+
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: context.colors.primary,

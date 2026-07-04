@@ -23,7 +23,9 @@ class SignInForm extends StatelessWidget {
             fillColor: context.colors.onPrimary.withValues(alpha: .09),
             prefixIcon: Icon(Icons.person),
           ),
-          context.spacing.vSm,
+
+          context.spacing.vMd,
+
           AppInput(
             controller: passwordController,
             hint: 'password',
@@ -32,14 +34,14 @@ class SignInForm extends StatelessWidget {
             prefixIcon: Icon(Icons.lock),
           ),
 
-          context.spacing.vSm,
+          context.spacing.vLg,
 
           Align(
             alignment: Alignment.centerRight,
             child: InkWell(onTap: () {}, child: Text('Forgot Password?')),
           ),
 
-          context.spacing.vMd,
+          context.spacing.vLg,
 
           AppButton(label: 'Sign In', onPressed: () {}),
         ],
