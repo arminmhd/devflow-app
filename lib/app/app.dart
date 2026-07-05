@@ -1,6 +1,9 @@
+import 'package:devflow/app/di/injector.dart';
 import 'package:devflow/app/router/app_router.dart';
 import 'package:devflow/core/theme/app_theme.dart';
+import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DevFlowApp extends StatelessWidget {
@@ -12,13 +15,18 @@ class DevFlowApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp.router(
-        title: 'DevFlow',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        routerConfig: AppRouter.router,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(create: (context) => sl<AuthBloc>()),
+        ],
+        child: MaterialApp.router(
+          title: 'DevFlow',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.system,
+          routerConfig: AppRouter.router,
+        ),
       ),
     );
   }
