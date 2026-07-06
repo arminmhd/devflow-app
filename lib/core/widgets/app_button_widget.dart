@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppButton extends StatelessWidget {
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool loading;
   final Color? buttonColor;
 
   const AppButton({
     super.key,
     required this.label,
-    required this.onPressed,
+    this.onPressed,
     this.loading = false,
     this.buttonColor,
   });

@@ -7,6 +7,7 @@ class AppInput extends StatelessWidget {
   final bool obscure;
   final Color? fillColor;
   final Widget? prefixIcon;
+  final String? Function(String?)? validator;
 
   const AppInput({
     super.key,
@@ -15,13 +16,15 @@ class AppInput extends StatelessWidget {
     this.obscure = false,
     this.fillColor,
     this.prefixIcon,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       obscureText: obscure,
+      validator: validator,
 
       style: context.textStyle.bodyLarge,
       decoration: InputDecoration(

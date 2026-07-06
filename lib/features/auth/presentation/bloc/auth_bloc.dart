@@ -1,3 +1,4 @@
+import 'package:devflow/core/network/error/failures.dart';
 import 'package:devflow/core/storage/token_storage.dart';
 import 'package:devflow/features/auth/domian/usecases/login_usecase.dart';
 import 'package:devflow/features/auth/domian/usecases/register_usecase.dart';
@@ -16,6 +17,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
+    emit(state.copyWith(loading: true, error: null));
+
     try {
       final result = await loginUseCase(event.email, event.password);
 
@@ -24,12 +27,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       emit(state.copyWith(loading: false, data: result));
     } catch (e) {
-      emit(state.copyWith(loading: false, error: e.toString()));
+      if (e is Failure) {
+        emit(state.copyWith(loading: false, error: e.message));
+      } else {
+        emit(state.copyWith(loading: false, error: "Unexpected error"));
+      }
     }
   }
 
   Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(loading: true));
+    emit(state.copyWith(loading: true, error: null));
 
     try {
       final result = await registerUseCase(
@@ -37,9 +44,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.password,
         event.fullName,
       );
+
       emit(state.copyWith(loading: false, data: result));
     } catch (e) {
-      emit(state.copyWith(loading: false, error: e.toString()));
+      if (e is Failure) {
+        emit(state.copyWith(loading: false, error: e.message));
+      } else {
+        emit(state.copyWith(loading: false, error: "Unexpected error"));
+      }
     }
   }
 }

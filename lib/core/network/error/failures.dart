@@ -1,13 +1,32 @@
-abstract class Failures {
+abstract class Failure {
   final String message;
-
-  Failures(this.message);
+  Failure(this.message);
 }
 
-class ServerFailure extends Failures {
+class ServerFailure extends Failure {
   ServerFailure(super.message);
 }
 
-class CacheFailure extends Failures {
+class NetworkFailure extends Failure {
+  NetworkFailure(super.message);
+}
+
+class UnauthorizedFailure extends Failure {
+  UnauthorizedFailure(super.message);
+}
+
+class ForbiddenFailure extends Failure {
+  ForbiddenFailure(super.message);
+}
+
+class NotFoundFailure extends Failure {
+  NotFoundFailure(super.message);
+}
+
+class CacheFailure extends Failure {
   CacheFailure(super.message);
+}
+
+class UnknownFailure extends Failure {
+  UnknownFailure(super.message);
 }

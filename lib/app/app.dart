@@ -1,5 +1,6 @@
 import 'package:devflow/app/di/injector.dart';
 import 'package:devflow/app/router/app_router.dart';
+import 'package:devflow/core/utils/app_messenger.dart';
 import 'package:devflow/core/theme/app_theme.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class DevFlowApp extends StatelessWidget {
         child: MaterialApp.router(
           title: 'DevFlow',
           debugShowCheckedModeBanner: false,
+          scaffoldMessengerKey: AppMessenger.key,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.system,
