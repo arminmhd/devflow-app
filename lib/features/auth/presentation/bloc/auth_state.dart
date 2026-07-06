@@ -14,7 +14,7 @@ class AuthState extends Equatable {
     return AuthState(
       loading: loading ?? this.loading,
       data: data ?? this.data,
-      error: error ?? this.error,
+      error: error,
     );
   }
 

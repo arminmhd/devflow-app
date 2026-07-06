@@ -1,3 +1,4 @@
+import 'package:devflow/app/router/app_route_names.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/utils/app_messenger.dart';
 import 'package:devflow/core/widgets/app_scaffold_widget.dart';
@@ -11,6 +12,7 @@ import 'package:devflow/features/auth/presentation/widgets/sign_in/sign_in_form.
 import 'package:devflow/features/auth/presentation/widgets/sign_in/sign_in_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -46,9 +48,11 @@ class _SignInPageState extends State<SignInPage> {
           AppMessenger.showError(state.error!, context);
         }
 
-        // if (state.data != null) {
-        //   context.go(AppRouteNames.)
-        // }
+        if (state.data != null) {
+          AppMessenger.showSuccess('Authorization successful', context);
+
+          context.go(AppRouteNames.home);
+        }
       },
       child: AppScaffold(
         isSafeArea: true,
@@ -89,7 +93,11 @@ class _SignInPageState extends State<SignInPage> {
 
                   context.spacing.vMd,
 
-                  SignInFooter(),
+                  SignInFooter(
+                    onSignUpPressed: () {
+                      context.push(AppRouteNames.signUp);
+                    },
+                  ),
                 ],
               );
             },

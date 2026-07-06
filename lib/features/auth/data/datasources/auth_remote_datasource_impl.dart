@@ -1,4 +1,5 @@
 import 'package:devflow/core/network/api_endpoints.dart';
+import 'package:devflow/core/network/error/exceptions.dart';
 import 'package:devflow/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:devflow/features/auth/data/models/login_response_model.dart';
 import 'package:dio/dio.dart';
@@ -10,12 +11,24 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
 
   @override
   Future<LoginResponseModel> login(String email, String password) async {
-    final response = await dio.post(
-      ApiEndpoints.login,
-      data: {"email": email, "password": password},
-    );
+    try {
+      final response = await dio.post(
+        ApiEndpoints.login,
+        data: {"email": email, "password": password},
+      );
 
-    return LoginResponseModel.fromJson(response.data);
+      if (response.data is Map<String, dynamic>) {
+        return LoginResponseModel.fromJson(
+          response.data as Map<String, dynamic>,
+        );
+      }
+
+      throw ServerException("Invalid login response format");
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnknownException("Unexpected error occurred");
+    }
   }
 
   @override
@@ -24,11 +37,23 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     String password,
     String fullName,
   ) async {
-    final response = await dio.post(
-      ApiEndpoints.register,
-      data: {"email": email, "password": password, 'full_name': fullName},
-    );
+    try {
+      final response = await dio.post(
+        ApiEndpoints.register,
+        data: {"email": email, "password": password, "full_name": fullName},
+      );
 
-    return LoginResponseModel.fromJson(response.data);
+      if (response.data is Map<String, dynamic>) {
+        return LoginResponseModel.fromJson(
+          response.data as Map<String, dynamic>,
+        );
+      }
+
+      throw ServerException("Invalid register response format");
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnknownException("Unexpected error occurred");
+    }
   }
 }

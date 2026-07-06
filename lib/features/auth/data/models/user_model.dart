@@ -5,19 +5,19 @@ class UserModel extends UserEntity {
     required super.id,
     required super.email,
     required super.fullName,
-    required super.avatar,
-    required super.bio,
+    super.avatar,
+    super.bio,
     required super.isVerified,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'],
-      email: json['email'],
-      fullName: json['fullName'],
+      id: json['id'] ?? 0,
+      email: json['email'] ?? '',
+      fullName: json['full_name'] ?? '',
       avatar: json['avatar'],
       bio: json['bio'],
-      isVerified: json['isVerified'],
+      isVerified: json['is_verified'] ?? false,
     );
   }
 }

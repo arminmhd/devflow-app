@@ -5,13 +5,13 @@ class AppScaffold extends StatelessWidget {
   final Widget body;
   final PreferredSizeWidget? appBar;
   final Widget? bottomNavigation;
-  final bool? isSafeArea;
+  final bool isSafeArea;
   const AppScaffold({
     super.key,
     required this.body,
     this.appBar,
     this.bottomNavigation,
-    this.isSafeArea,
+    this.isSafeArea = false,
   });
 
   @override
@@ -19,7 +19,7 @@ class AppScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colors.surface,
       appBar: appBar,
-      body: isSafeArea! ? SafeArea(child: body) : body,
+      body: isSafeArea ? SafeArea(child: body) : body,
       bottomNavigationBar: bottomNavigation,
     );
   }

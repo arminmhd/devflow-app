@@ -5,7 +5,7 @@ class AppAuthValidators {
       return 'Full name is required';
     }
 
-    if (!value.contains(" ")) {
+    if (!value.contains("")) {
       return "Please enter your full name";
     }
 

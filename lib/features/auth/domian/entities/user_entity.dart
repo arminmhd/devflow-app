@@ -5,16 +5,16 @@ class UserEntity extends Equatable {
   final String email;
   final String fullName;
   final String? avatar;
-  final String bio;
-  final String isVerified;
+  final String? bio;
+  final bool? isVerified;
 
   const UserEntity({
     required this.id,
     required this.email,
     required this.fullName,
     this.avatar,
-    required this.bio,
-    required this.isVerified,
+    this.bio,
+    this.isVerified,
   });
 
   @override

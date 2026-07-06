@@ -3,7 +3,8 @@ import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class SignInFooter extends StatelessWidget {
-  const SignInFooter({super.key});
+  final VoidCallback? onSignUpPressed;
+  const SignInFooter({super.key, this.onSignUpPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class SignInFooter extends StatelessWidget {
         context.spacing.hSm,
 
         GestureDetector(
-          onTap: () {},
+          onTap: onSignUpPressed,
           child: AppText(
             'Sign Up',
             style: context.textStyle.bodyLarge.copyWith(
