@@ -6,6 +6,7 @@ import 'package:devflow/core/services/retry_queue_service.dart';
 import 'package:devflow/core/utils/app_messenger.dart';
 import 'package:devflow/core/theme/app_theme.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:devflow/features/home/presentation/bloc/home_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,8 @@ class DevFlowApp extends StatelessWidget {
           BlocProvider<AuthBloc>(create: (context) => sl<AuthBloc>()),
 
           BlocProvider<NetworkBloc>(create: (context) => sl<NetworkBloc>()),
+
+          BlocProvider<HomeBloc>(create: (context) => sl<HomeBloc>()),
         ],
         child: BlocListener<NetworkBloc, NetworkState>(
           listener: (context, state) {

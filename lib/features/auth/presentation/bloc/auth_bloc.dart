@@ -9,9 +9,13 @@ import '../../domian/usecases/register_usecase.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
+  final TokenStorage storage;
 
-  AuthBloc({required this.loginUseCase, required this.registerUseCase})
-    : super(AuthState.initial()) {
+  AuthBloc({
+    required this.loginUseCase,
+    required this.registerUseCase,
+    required this.storage,
+  }) : super(AuthState.initial()) {
     on<LoginEvent>(_onLogin);
     on<RegisterEvent>(_onRegister);
   }
@@ -22,8 +26,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       final result = await loginUseCase(event.email, event.password);
 
-      await TokenStorage.saveAccessToken(result.access);
-      await TokenStorage.saveRefreshToken(result.refresh);
+      await storage.saveAccessToken(result.access);
+      await storage.saveRefreshToken(result.refresh);
 
       emit(state.copyWith(loading: false, data: result, error: null));
     } catch (e) {

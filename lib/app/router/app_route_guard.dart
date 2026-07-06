@@ -1,3 +1,4 @@
+import 'package:devflow/app/di/injector.dart';
 import 'package:devflow/core/storage/token_storage.dart';
 import 'package:devflow/app/router/app_route_paths.dart';
 import 'package:flutter/widgets.dart';
@@ -8,7 +9,7 @@ class RouteGuard {
     BuildContext context,
     GoRouterState state,
   ) async {
-    final access = await TokenStorage.getAccessToken();
+    final access = await sl<TokenStorage>().getAccessToken();
 
     final isLoggedIn = access != null && access.isNotEmpty;
 

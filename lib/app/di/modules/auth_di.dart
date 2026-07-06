@@ -22,6 +22,6 @@ Future<void> initAuthDependencies() async {
 
   // Bloc
   sl.registerFactory<AuthBloc>(
-    () => AuthBloc(loginUseCase: sl(), registerUseCase: sl()),
+    () => AuthBloc(loginUseCase: sl(), registerUseCase: sl(), storage: sl()),
   );
 }

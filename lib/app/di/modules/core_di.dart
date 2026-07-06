@@ -8,15 +8,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 Future<void> initCoreDependencies() async {
-  // dio
-  sl.registerLazySingleton<Dio>(
-    () => DioClient.create(TokenStorage.getAccessToken),
-  );
-
   // Services
   sl.registerLazySingleton(() => FlutterSecureStorage());
   sl.registerLazySingleton(() => ConnectivityService());
   sl.registerLazySingleton(() => RetryQueueService());
+  sl.registerLazySingleton(() => TokenStorage());
+
+  // dio
+  sl.registerLazySingleton<Dio>(() => DioClient.create(sl()));
 
   //global blocs
   sl.registerFactory(() => NetworkBloc(sl()));
