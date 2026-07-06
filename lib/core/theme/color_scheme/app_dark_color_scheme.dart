@@ -24,5 +24,8 @@ ColorScheme get darkColorScheme {
 
     outline: AppColors.grey.withValues(alpha: 0.3),
     shadow: Colors.black.withValues(alpha: 0.4),
+
+    secondaryContainer: AppColors.warning,
+    tertiaryContainer: AppColors.success,
   );
 }

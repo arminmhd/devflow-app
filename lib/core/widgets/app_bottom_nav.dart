@@ -1,3 +1,4 @@
+import 'package:devflow/core/widgets/app_bottom_nav_icon.dart';
 import 'package:flutter/material.dart';
 
 class AppBottomNav extends StatelessWidget {
@@ -16,21 +17,42 @@ class AppBottomNav extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: onTap,
       type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.folder_outlined),
+          icon: AppBottomNavIcon(
+            data: 'assets/icons/home.png',
+            isActive: currentIndex == 0,
+          ),
+          label: "Home",
+        ),
+        BottomNavigationBarItem(
+          icon: AppBottomNavIcon(
+            data: 'assets/icons/folder.png',
+            isActive: currentIndex == 1,
+          ),
           label: "Projects",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.checklist_outlined),
+          icon: AppBottomNavIcon(
+            data: 'assets/icons/checklist.png',
+            isActive: currentIndex == 2,
+          ),
           label: "Tasks",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.timer_outlined),
+          icon: AppBottomNavIcon(
+            data: 'assets/icons/timer.png',
+            isActive: currentIndex == 3,
+          ),
           label: "Timer",
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "More"),
+        BottomNavigationBarItem(
+          icon: AppBottomNavIcon(
+            data: 'assets/icons/more.png',
+            isActive: currentIndex == 3,
+          ),
+          label: "More",
+        ),
       ],
     );
   }
