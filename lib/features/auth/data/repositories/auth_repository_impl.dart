@@ -1,4 +1,5 @@
 import 'package:devflow/core/network/error/failure_mapper.dart';
+import 'package:devflow/features/auth/data/models/user_model.dart';
 import 'package:devflow/features/auth/domian/repositories/auth_repository.dart';
 import '../datasources/auth_remote_datasource.dart';
 import '../models/login_response_model.dart';
@@ -27,5 +28,12 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e) {
       throw FailureMapper.map(e);
     }
+  }
+
+  @override
+  Future<UserModel> getCurrentUser() async {
+    final response = await remote.getCurrentUser();
+
+    return response;
   }
 }

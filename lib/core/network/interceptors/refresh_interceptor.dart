@@ -1,3 +1,4 @@
+import 'package:devflow/core/network/api_endpoints.dart';
 import 'package:devflow/core/storage/token_storage.dart';
 import 'package:dio/dio.dart';
 
@@ -18,18 +19,17 @@ class RefreshInterceptor extends Interceptor {
 
       try {
         final refreshDio = Dio(
-          BaseOptions(baseUrl: 'http://10.106.168.74:8000/api/'),
+          BaseOptions(baseUrl: 'http://10.106.168.195:8000/api/'),
         );
 
         final response = await refreshDio.post(
-          '/accounts/refresh/',
+          ApiEndpoints.refreshToken,
           data: {'refresh': refreshToken},
         );
 
         final newAccess = response.data['access'];
 
         if (newAccess == null) {
-          print("NEW ACCESS TOKEN IS NULL");
           return handler.next(err);
         }
 

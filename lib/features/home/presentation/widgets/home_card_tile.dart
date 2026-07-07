@@ -12,7 +12,7 @@ class HomeCardTile extends StatelessWidget {
       padding: context.padding.md,
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: context.shadow.md,
+        boxShadow: context.shadow.sm,
         borderRadius: context.radius.largeRadius,
         color: color,
       ),

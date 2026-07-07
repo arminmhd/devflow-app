@@ -15,8 +15,8 @@ class AppBottomNavIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       data,
-      width: 25.w,
-      height: 25.h,
+      width: 20.w,
+      height: 20.h,
       fit: BoxFit.cover,
       color: isActive ? context.colors.secondary : context.colors.onPrimary,
     );

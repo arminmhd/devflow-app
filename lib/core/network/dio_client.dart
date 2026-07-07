@@ -9,7 +9,7 @@ class DioClient {
   static Dio create(TokenStorage storage) {
     final dio = Dio(
       BaseOptions(
-        baseUrl: 'http://10.106.168.74:8000/api/',
+        baseUrl: 'http://10.106.168.195:8000/api/',
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
       ),

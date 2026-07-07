@@ -6,16 +6,16 @@ ColorScheme get lightColorScheme {
     brightness: Brightness.light,
 
     primary: AppColors.primary,
-    onPrimary: Colors.white,
+    onPrimary: Colors.black,
 
     secondary: AppColors.secondary,
-    onSecondary: Colors.white,
+    onSecondary: Colors.black,
 
     tertiary: AppColors.grey,
-    onTertiary: Colors.white,
+    onTertiary: Colors.black,
 
     error: AppColors.error,
-    onError: Colors.white,
+    onError: Colors.black,
 
     surface: AppColors.white,
     onSurface: AppColors.black,

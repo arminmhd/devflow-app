@@ -25,3 +25,7 @@ class RegisterEvent extends AuthEvent {
   @override
   List<Object?> get props => [email, password, fullName];
 }
+
+class GetCurrentUserEvent extends AuthEvent {
+  GetCurrentUserEvent();
+}

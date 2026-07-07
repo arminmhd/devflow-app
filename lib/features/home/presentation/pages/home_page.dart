@@ -4,11 +4,11 @@ import 'package:devflow/core/widgets/app_scaffold_widget.dart';
 import 'package:devflow/features/home/presentation/bloc/home_bloc.dart';
 import 'package:devflow/features/home/presentation/bloc/home_event.dart';
 import 'package:devflow/features/home/presentation/bloc/home_state.dart';
+import 'package:devflow/features/home/presentation/widgets/home_activities.dart';
 import 'package:devflow/features/home/presentation/widgets/home_grid.dart';
 import 'package:devflow/features/home/presentation/widgets/home_header.dart';
 import 'package:devflow/features/home/presentation/widgets/home_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,6 +63,10 @@ class _HomePageState extends State<HomePage> {
                         totalTime: dashboard.totalTime,
                         totalIncome: dashboard.totalIncome,
                       ),
+
+                      context.spacing.vMd,
+
+                      HomeActivities(),
                     ],
                   ),
                 ),

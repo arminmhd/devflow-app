@@ -2,6 +2,7 @@ import 'package:devflow/core/network/api_endpoints.dart';
 import 'package:devflow/core/network/error/exceptions.dart';
 import 'package:devflow/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:devflow/features/auth/data/models/login_response_model.dart';
+import 'package:devflow/features/auth/data/models/user_model.dart';
 import 'package:dio/dio.dart';
 
 class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
@@ -55,5 +56,12 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     } catch (e) {
       throw UnknownException("Unexpected error occurred");
     }
+  }
+
+  @override
+  Future<UserModel> getCurrentUser() async {
+    final response = await dio.get(ApiEndpoints.profile);
+
+    return UserModel.fromJson(response.data);
   }
 }

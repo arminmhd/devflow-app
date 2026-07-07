@@ -1,3 +1,4 @@
+import 'package:devflow/features/auth/domian/usecases/get_current_user_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
@@ -9,15 +10,18 @@ import '../../domian/usecases/register_usecase.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
+  final GetCurrentUserUseCase currentUserUseCase;
   final TokenStorage storage;
 
   AuthBloc({
     required this.loginUseCase,
     required this.registerUseCase,
     required this.storage,
+    required this.currentUserUseCase,
   }) : super(AuthState.initial()) {
     on<LoginEvent>(_onLogin);
     on<RegisterEvent>(_onRegister);
+    on<GetCurrentUserEvent>(_onGetCurrentUser);
   }
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
@@ -29,6 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await storage.saveAccessToken(result.access);
       await storage.saveRefreshToken(result.refresh);
 
+      add(GetCurrentUserEvent());
       emit(state.copyWith(loading: false, data: result, error: null));
     } catch (e) {
       final failure = e is Failure ? e : UnknownFailure("Unexpected error");
@@ -46,9 +51,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.fullName,
       );
 
+      add(GetCurrentUserEvent());
+
       emit(state.copyWith(loading: false, data: result, error: null));
     } catch (e) {
       final failure = e is Failure ? e : UnknownFailure("Unexpected error");
+      emit(state.copyWith(loading: false, error: failure.message));
+    }
+  }
+
+  Future<void> _onGetCurrentUser(
+    GetCurrentUserEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.copyWith(loading: true, error: null));
+
+    try {
+      final user = await currentUserUseCase();
+
+      emit(state.copyWith(loading: false, user: user, error: null));
+    } catch (e) {
+      final failure = e is Failure ? e : UnknownFailure("Unexpected error!");
+
       emit(state.copyWith(loading: false, error: failure.message));
     }
   }

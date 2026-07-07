@@ -1,4 +1,5 @@
 import 'package:devflow/features/auth/data/models/login_response_model.dart';
+import 'package:devflow/features/auth/data/models/user_model.dart';
 
 abstract class AuthRepository {
   Future<LoginResponseModel> login(String email, String password);
@@ -7,4 +8,6 @@ abstract class AuthRepository {
     String password,
     String fullName,
   );
+
+  Future<UserModel> getCurrentUser();
 }

@@ -4,6 +4,7 @@ class ApiEndpoints {
   static const register = 'accounts/register/';
   static const profile = 'accounts/me/';
   static const changePassword = 'accounts/change-password/';
+  static const refreshToken = '/accounts/refresh/';
 
   // Projects
   static const projects = 'projects/';
