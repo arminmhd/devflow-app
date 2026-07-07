@@ -6,6 +6,7 @@ import 'package:devflow/core/services/retry_queue_service.dart';
 import 'package:devflow/core/utils/app_messenger.dart';
 import 'package:devflow/core/theme/app_theme.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:devflow/features/auth/presentation/bloc/auth_event.dart';
 import 'package:devflow/features/home/presentation/bloc/home_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,9 @@ class DevFlowApp extends StatelessWidget {
       splitScreenMode: true,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthBloc>(create: (context) => sl<AuthBloc>()),
+          BlocProvider<AuthBloc>(
+            create: (context) => sl<AuthBloc>()..add(CheckAuthStatusEvent()),
+          ),
 
           BlocProvider<NetworkBloc>(create: (context) => sl<NetworkBloc>()),
 

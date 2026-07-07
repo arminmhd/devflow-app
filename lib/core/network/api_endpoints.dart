@@ -37,4 +37,5 @@ class ApiEndpoints {
 
   // Dashboard
   static const dashboard = 'dashboard/';
+  static const recentActivity = 'dashboard/recent-activity/';
 }

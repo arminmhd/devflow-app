@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     context.read<HomeBloc>().add(LoadDashboardEvent());
+    context.read<HomeBloc>().add(LoadRecentActivityEvent());
   }
 
   @override
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 
                       context.spacing.vMd,
 
-                      HomeActivities(),
+                      HomeActivities(activities: state.recentActivity!),
                     ],
                   ),
                 ),

@@ -48,7 +48,7 @@ class _SignInPageState extends State<SignInPage> {
           AppMessenger.showError(state.error!, context);
         }
 
-        if (state.data != null) {
+        if (state.status == AuthStatus.authenticated && state.user == null) {
           AppMessenger.showSuccess('Authorization successful', context);
 
           context.go(AppRouteNames.home);

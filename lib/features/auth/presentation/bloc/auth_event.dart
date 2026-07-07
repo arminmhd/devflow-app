@@ -29,3 +29,7 @@ class RegisterEvent extends AuthEvent {
 class GetCurrentUserEvent extends AuthEvent {
   GetCurrentUserEvent();
 }
+
+class CheckAuthStatusEvent extends AuthEvent {
+  CheckAuthStatusEvent();
+}

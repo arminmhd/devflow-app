@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class HomeGridItem extends StatelessWidget {
   final Color color;
+  final Color? iconColor;
   final String title;
   final String subTitle;
   final IconData icon;
@@ -14,6 +15,7 @@ class HomeGridItem extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.icon,
+    this.iconColor,
   });
 
   @override
@@ -35,7 +37,7 @@ class HomeGridItem extends StatelessWidget {
           ),
           Spacer(),
 
-          Expanded(flex: 1, child: Icon(icon)),
+          Expanded(flex: 1, child: Icon(icon, color: iconColor)),
         ],
       ),
     );

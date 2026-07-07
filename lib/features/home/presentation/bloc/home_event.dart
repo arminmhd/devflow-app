@@ -6,3 +6,5 @@ abstract class HomeEvent extends Equatable {
 }
 
 class LoadDashboardEvent extends HomeEvent {}
+
+class LoadRecentActivityEvent extends HomeEvent {}

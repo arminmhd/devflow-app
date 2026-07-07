@@ -1,4 +1,5 @@
 import 'package:devflow/features/home/data/datasource/dashboard_remote_datasource.dart';
+import 'package:devflow/features/home/domain/entities/recent_activity_entity.dart';
 import '../../domain/entities/dashboard_entity.dart';
 import '../../domain/repository/dashboard_repository.dart';
 
@@ -10,5 +11,10 @@ class DashboardRepositoryImpl implements DashboardRepository {
   @override
   Future<DashboardEntity> getDashboard() {
     return remote.getDashboard();
+  }
+
+  @override
+  Future<List<RecentActivityEntity>> getRecentActivity() async {
+    return remote.getRecentActivity();
   }
 }

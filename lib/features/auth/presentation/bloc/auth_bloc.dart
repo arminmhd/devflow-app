@@ -22,6 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>(_onLogin);
     on<RegisterEvent>(_onRegister);
     on<GetCurrentUserEvent>(_onGetCurrentUser);
+    on<CheckAuthStatusEvent>(_onCheckAuthStatus);
   }
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
@@ -33,8 +34,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await storage.saveAccessToken(result.access);
       await storage.saveRefreshToken(result.refresh);
 
+      emit(
+        state.copyWith(
+          status: AuthStatus.authenticated,
+          loading: false,
+          data: result,
+          error: null,
+        ),
+      );
+
       add(GetCurrentUserEvent());
-      emit(state.copyWith(loading: false, data: result, error: null));
     } catch (e) {
       final failure = e is Failure ? e : UnknownFailure("Unexpected error");
       emit(state.copyWith(loading: false, error: failure.message));
@@ -51,8 +60,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.fullName,
       );
 
-      add(GetCurrentUserEvent());
-
       emit(state.copyWith(loading: false, data: result, error: null));
     } catch (e) {
       final failure = e is Failure ? e : UnknownFailure("Unexpected error");
@@ -60,20 +67,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+  Future<void> _onCheckAuthStatus(
+    CheckAuthStatusEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final access = await storage.getAccessToken();
+
+    if (access == null) {
+      emit(AuthState.initial());
+      return;
+    }
+
+    add(GetCurrentUserEvent());
+  }
+
   Future<void> _onGetCurrentUser(
     GetCurrentUserEvent event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(loading: true, error: null));
-
     try {
       final user = await currentUserUseCase();
-
-      emit(state.copyWith(loading: false, user: user, error: null));
+      emit(state.copyWith(user: user, error: null));
     } catch (e) {
       final failure = e is Failure ? e : UnknownFailure("Unexpected error!");
-
-      emit(state.copyWith(loading: false, error: failure.message));
+      emit(state.copyWith(error: failure.message));
     }
   }
 }

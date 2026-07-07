@@ -25,24 +25,28 @@ class HomeGrid extends StatelessWidget {
         title: projectsCount.toString(),
         subTitle: 'Active projects',
         icon: Icons.list_alt,
+        iconColor: context.colors.outline,
       ),
       HomeGridItem(
         color: context.colors.secondaryContainer.withValues(alpha: .40),
         title: Formatters.number(tasksToday),
         subTitle: "Today's Tasks",
         icon: Icons.task_alt,
+        iconColor: context.colors.secondaryContainer,
       ),
       HomeGridItem(
         color: context.colors.tertiaryContainer.withValues(alpha: .40),
         title: Formatters.time(totalTime),
         subTitle: "Time Today",
         icon: Icons.timer,
+        iconColor: context.colors.tertiaryContainer,
       ),
       HomeGridItem(
         color: context.colors.secondary.withValues(alpha: 0.40),
         title: Formatters.income(totalIncome),
         subTitle: "Income This Month",
         icon: Icons.attach_money,
+        iconColor: context.colors.secondary,
       ),
     ];
 

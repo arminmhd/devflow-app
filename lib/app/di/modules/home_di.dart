@@ -4,6 +4,7 @@ import 'package:devflow/features/home/data/datasource/dashboard_remote_datasourc
 import 'package:devflow/features/home/data/repository/dashboard_repository_impl.dart';
 import 'package:devflow/features/home/domain/repository/dashboard_repository.dart';
 import 'package:devflow/features/home/domain/usecases/get_dashboard_usecase.dart';
+import 'package:devflow/features/home/domain/usecases/get_recent_activity_usecase.dart';
 import 'package:devflow/features/home/presentation/bloc/home_bloc.dart';
 
 Future<void> initHomeDependencies() async {
@@ -19,7 +20,10 @@ Future<void> initHomeDependencies() async {
 
   //useCases
   sl.registerLazySingleton(() => GetDashboardUseCase(sl()));
+  sl.registerLazySingleton(() => GetRecentActivityUseCase(sl()));
 
   //bloc
-  sl.registerFactory(() => HomeBloc(sl()));
+  sl.registerFactory(
+    () => HomeBloc(getDashboardUseCase: sl(), getRecentActivityUseCase: sl()),
+  );
 }
