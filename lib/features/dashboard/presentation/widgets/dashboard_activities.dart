@@ -1,12 +1,12 @@
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
-import 'package:devflow/features/home/domain/entities/recent_activity_entity.dart';
-import 'package:devflow/features/home/presentation/widgets/home_activity_item.dart';
+import 'package:devflow/features/dashboard/domain/entities/recent_activity_entity.dart';
+import 'package:devflow/features/dashboard/presentation/widgets/dashboard_activity_item.dart';
 import 'package:flutter/material.dart';
 
-class HomeActivities extends StatelessWidget {
+class DashboardActivities extends StatelessWidget {
   final List<RecentActivityEntity> activities;
-  const HomeActivities({super.key, required this.activities});
+  const DashboardActivities({super.key, required this.activities});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,14 @@ class HomeActivities extends StatelessWidget {
             ),
           ),
 
-        ...activities.map((a) => HomeActivityItem(activity: a)),
+        Expanded(
+          child: ListView.builder(
+            itemCount: activities.length,
+            itemBuilder: (context, index) {
+              return HomeActivityItem(activity: activities[index]);
+            },
+          ),
+        ),
       ],
     );
   }

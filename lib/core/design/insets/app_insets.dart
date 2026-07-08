@@ -20,10 +20,12 @@ final class AppInsets {
   EdgeInsets get hMd => const EdgeInsets.symmetric(horizontal: 12);
   EdgeInsets get hLg => const EdgeInsets.symmetric(horizontal: 16);
   EdgeInsets get hXl => const EdgeInsets.symmetric(horizontal: 24);
+  EdgeInsets get screenH => const EdgeInsets.symmetric(horizontal: 28);
 
   // Vertical
   EdgeInsets get vSm => const EdgeInsets.symmetric(vertical: 8);
   EdgeInsets get vMd => const EdgeInsets.symmetric(vertical: 12);
   EdgeInsets get vLg => const EdgeInsets.symmetric(vertical: 16);
   EdgeInsets get vXl => const EdgeInsets.symmetric(vertical: 24);
+  EdgeInsets get screenV => const EdgeInsets.symmetric(vertical: 28);
 }

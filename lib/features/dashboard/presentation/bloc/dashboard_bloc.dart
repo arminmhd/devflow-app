@@ -1,44 +1,44 @@
-import 'package:devflow/features/home/domain/usecases/get_dashboard_usecase.dart';
-import 'package:devflow/features/home/domain/usecases/get_recent_activity_usecase.dart';
-import 'package:devflow/features/home/presentation/bloc/home_event.dart';
-import 'package:devflow/features/home/presentation/bloc/home_state.dart';
+import 'package:devflow/features/dashboard/domain/usecases/get_dashboard_usecase.dart';
+import 'package:devflow/features/dashboard/domain/usecases/get_recent_activity_usecase.dart';
+import 'package:devflow/features/dashboard/presentation/bloc/dashboard_event.dart';
+import 'package:devflow/features/dashboard/presentation/bloc/dashboard_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
+class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final GetDashboardUseCase getDashboardUseCase;
   final GetRecentActivityUseCase getRecentActivityUseCase;
 
-  HomeBloc({
+  DashboardBloc({
     required this.getRecentActivityUseCase,
     required this.getDashboardUseCase,
-  }) : super(HomeState.initial()) {
+  }) : super(DashboardState.initial()) {
     on<LoadDashboardEvent>(_onLoadDashboard);
     on<LoadRecentActivityEvent>(_onLoadRecentActivity);
   }
 
   Future<void> _onLoadDashboard(
     LoadDashboardEvent event,
-    Emitter<HomeState> emit,
+    Emitter<DashboardState> emit,
   ) async {
-    emit(HomeState.loading());
+    emit(DashboardState.loading());
 
     try {
       final result = await getDashboardUseCase();
-      emit(HomeState.loaded(data: result, recentActivity: []));
+      emit(DashboardState.loaded(data: result, recentActivity: []));
     } catch (e) {
-      emit(HomeState.error(e.toString()));
+      emit(DashboardState.error(e.toString()));
     }
   }
 
   Future<void> _onLoadRecentActivity(
     LoadRecentActivityEvent event,
-    Emitter<HomeState> emit,
+    Emitter<DashboardState> emit,
   ) async {
     try {
       final recent = await getRecentActivityUseCase();
       emit(state.copyWith(recentActivity: recent));
     } catch (e) {
-      emit(HomeState.error(e.toString()));
+      emit(DashboardState.error(e.toString()));
     }
   }
 }

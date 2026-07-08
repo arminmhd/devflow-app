@@ -1,4 +1,4 @@
-import 'package:devflow/features/home/domain/entities/recent_activity_entity.dart';
+import 'package:devflow/features/dashboard/domain/entities/recent_activity_entity.dart';
 
 class RecentActivityModel extends RecentActivityEntity {
   RecentActivityModel({

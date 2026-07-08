@@ -1,15 +1,15 @@
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
-import 'package:devflow/features/home/presentation/widgets/home_card_tile.dart';
+import 'package:devflow/features/dashboard/presentation/widgets/dashboard_card_tile.dart';
 import 'package:flutter/material.dart';
 
-class HomeGridItem extends StatelessWidget {
+class DashboardGridItem extends StatelessWidget {
   final Color color;
   final Color? iconColor;
   final String title;
   final String subTitle;
   final IconData icon;
-  const HomeGridItem({
+  const DashboardGridItem({
     super.key,
     required this.color,
     required this.title,
@@ -20,7 +20,7 @@ class HomeGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeCardTile(
+    return DashboardCardTile(
       color: color,
       child: Row(
         children: [

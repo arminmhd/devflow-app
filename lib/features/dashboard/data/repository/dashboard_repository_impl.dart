@@ -1,5 +1,5 @@
-import 'package:devflow/features/home/data/datasource/dashboard_remote_datasource.dart';
-import 'package:devflow/features/home/domain/entities/recent_activity_entity.dart';
+import 'package:devflow/features/dashboard/data/datasource/dashboard_remote_datasource.dart';
+import 'package:devflow/features/dashboard/domain/entities/recent_activity_entity.dart';
 import '../../domain/entities/dashboard_entity.dart';
 import '../../domain/repository/dashboard_repository.dart';
 

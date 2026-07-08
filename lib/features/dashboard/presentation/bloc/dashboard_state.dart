@@ -1,68 +1,68 @@
-import 'package:devflow/features/home/domain/entities/dashboard_entity.dart';
-import 'package:devflow/features/home/domain/entities/recent_activity_entity.dart';
+import 'package:devflow/features/dashboard/domain/entities/dashboard_entity.dart';
+import 'package:devflow/features/dashboard/domain/entities/recent_activity_entity.dart';
 import 'package:equatable/equatable.dart';
 
-enum HomeStatus { initial, loading, loaded, error }
+enum DashboardStatus { initial, loading, loaded, error }
 
-class HomeState extends Equatable {
+class DashboardState extends Equatable {
   final DashboardEntity? data;
   final List<RecentActivityEntity>? recentActivity;
-  final HomeStatus status;
+  final DashboardStatus status;
   final String? error;
 
-  const HomeState({
+  const DashboardState({
     this.data,
     this.error,
     required this.status,
     this.recentActivity,
   });
 
-  factory HomeState.initial() {
-    return const HomeState(
-      status: HomeStatus.initial,
+  factory DashboardState.initial() {
+    return const DashboardState(
+      status: DashboardStatus.initial,
       data: null,
       error: null,
       recentActivity: [],
     );
   }
 
-  factory HomeState.loading() {
-    return const HomeState(
-      status: HomeStatus.loading,
+  factory DashboardState.loading() {
+    return const DashboardState(
+      status: DashboardStatus.loading,
       data: null,
       error: null,
       recentActivity: [],
     );
   }
 
-  factory HomeState.loaded({
+  factory DashboardState.loaded({
     required DashboardEntity data,
     required List<RecentActivityEntity> recentActivity,
   }) {
-    return HomeState(
-      status: HomeStatus.loaded,
+    return DashboardState(
+      status: DashboardStatus.loaded,
       data: data,
       error: null,
       recentActivity: recentActivity,
     );
   }
 
-  factory HomeState.error(String message) {
-    return HomeState(
-      status: HomeStatus.error,
+  factory DashboardState.error(String message) {
+    return DashboardState(
+      status: DashboardStatus.error,
       data: null,
       error: message,
       recentActivity: [],
     );
   }
 
-  HomeState copyWith({
-    HomeStatus? status,
+  DashboardState copyWith({
+    DashboardStatus? status,
     DashboardEntity? data,
     String? error,
     List<RecentActivityEntity>? recentActivity,
   }) {
-    return HomeState(
+    return DashboardState(
       status: status ?? this.status,
       data: data ?? this.data,
       error: error ?? this.error,

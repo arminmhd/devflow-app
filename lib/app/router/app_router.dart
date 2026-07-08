@@ -3,7 +3,7 @@ import 'package:devflow/app/router/app_route_guard.dart';
 import 'package:devflow/app/router/app_route_names.dart';
 import 'package:devflow/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:devflow/features/auth/presentation/pages/sign_up_page.dart';
-import 'package:devflow/features/home/presentation/pages/home_page.dart';
+import 'package:devflow/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'app_route_paths.dart';
@@ -32,7 +32,7 @@ class AppRouter {
               GoRoute(
                 path: AppRoutePaths.home,
                 name: AppRouteNames.home,
-                builder: (_, _) => const HomePage(),
+                builder: (_, _) => const DashboardPage(),
               ),
             ],
           ),
