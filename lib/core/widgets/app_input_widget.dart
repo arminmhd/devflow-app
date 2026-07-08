@@ -8,6 +8,8 @@ class AppInput extends StatelessWidget {
   final Color? fillColor;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
+  final BorderRadius? borderRadius;
+  final BorderSide? border;
 
   const AppInput({
     super.key,
@@ -17,6 +19,8 @@ class AppInput extends StatelessWidget {
     this.fillColor,
     this.prefixIcon,
     this.validator,
+    this.borderRadius,
+    this.border,
   });
 
   @override
@@ -37,15 +41,15 @@ class AppInput extends StatelessWidget {
         filled: true,
         fillColor: fillColor ?? context.colors.surfaceContainerHighest,
         border: OutlineInputBorder(
-          borderRadius: context.radius.mediumRadius,
-          borderSide: BorderSide(color: context.colors.outline),
+          borderRadius: borderRadius ?? context.radius.mediumRadius,
+          borderSide: border ?? BorderSide(color: context.colors.outline),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: context.radius.mediumRadius,
-          borderSide: BorderSide(color: context.colors.outline),
+          borderRadius: borderRadius ?? context.radius.mediumRadius,
+          borderSide: border ?? BorderSide(color: context.colors.outline),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: context.radius.mediumRadius,
+          borderRadius: borderRadius ?? context.radius.mediumRadius,
           borderSide: BorderSide(color: context.colors.primary),
         ),
       ),

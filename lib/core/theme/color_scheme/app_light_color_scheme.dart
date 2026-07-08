@@ -21,6 +21,7 @@ ColorScheme get lightColorScheme {
     onSurface: AppColors.black,
 
     surfaceContainerHighest: AppColors.white.withValues(alpha: 0.9),
+    surfaceContainer: AppColors.white.withValues(alpha: 0.8),
 
     outline: AppColors.grey.withValues(alpha: 0.4),
     shadow: Colors.black.withValues(alpha: 0.1),

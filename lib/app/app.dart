@@ -8,6 +8,7 @@ import 'package:devflow/core/theme/app_theme.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_event.dart';
 import 'package:devflow/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:devflow/features/projects/presentation/bloc/projects_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,8 @@ class DevFlowApp extends StatelessWidget {
           BlocProvider<NetworkBloc>(create: (context) => sl<NetworkBloc>()),
 
           BlocProvider<DashboardBloc>(create: (context) => sl<DashboardBloc>()),
+
+          BlocProvider<ProjectsBloc>(create: (context) => sl<ProjectsBloc>()),
         ],
         child: BlocListener<NetworkBloc, NetworkState>(
           listener: (context, state) {

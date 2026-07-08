@@ -6,18 +6,38 @@ final class AppShadows {
   static const instance = AppShadows._();
 
   List<BoxShadow> get sm => const [
-    BoxShadow(color: Color(0x1A000000), blurRadius: 4, offset: Offset(0, 2)),
+    BoxShadow(
+      color: Color(0x1A000000),
+      blurRadius: 4,
+      spreadRadius: 1,
+      offset: Offset.zero,
+    ),
   ];
 
   List<BoxShadow> get md => const [
-    BoxShadow(color: Color(0x1A000000), blurRadius: 8, offset: Offset(0, 4)),
+    BoxShadow(
+      color: Color(0x1A000000),
+      blurRadius: 8,
+      spreadRadius: 2,
+      offset: Offset.zero,
+    ),
   ];
 
   List<BoxShadow> get lg => const [
-    BoxShadow(color: Color(0x1A000000), blurRadius: 16, offset: Offset(0, 8)),
+    BoxShadow(
+      color: Color(0x1A000000),
+      blurRadius: 16,
+      spreadRadius: 3,
+      offset: Offset.zero,
+    ),
   ];
 
   List<BoxShadow> get xl => const [
-    BoxShadow(color: Color(0x1A000000), blurRadius: 24, offset: Offset(0, 12)),
+    BoxShadow(
+      color: Color(0x1A000000),
+      blurRadius: 24,
+      spreadRadius: 4,
+      offset: Offset.zero,
+    ),
   ];
 }

@@ -22,6 +22,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         actions: actions,
         leading: leading,
         scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        backgroundColor: context.colors.surface,
       ),
     );
   }
