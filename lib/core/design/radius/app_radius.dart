@@ -1,26 +1,11 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 
-final class AppRadius {
-  const AppRadius._();
-
-  static const instance = AppRadius._();
-
-  static double small = 4.0;
-  static double medium = 8.0;
-  static double large = 16.0;
-  static double extraLarge = 24.0;
-  static double huge = 30.0;
-  static double full = 99;
-
-  BorderRadius get smallRadius => BorderRadius.circular(small);
-  BorderRadius get mediumRadius => BorderRadius.circular(medium);
-  BorderRadius get largeRadius => BorderRadius.circular(large);
-  BorderRadius get extraLargeRadius => BorderRadius.circular(extraLarge);
-  BorderRadius get hugeRadius => BorderRadius.circular(huge);
-  BorderRadius get fullRadius => BorderRadius.circular(full);
-
-  BorderRadius get extraLargeTopRadius => BorderRadius.only(
-    topLeft: Radius.circular(huge),
-    topRight: Radius.circular(huge),
-  );
+@immutable
+abstract final class AppRadius {
+  static const double sm = 4;
+  static const double md = 8;
+  static const double lg = 16;
+  static const double xl = 24;
+  static const double huge = 30;
+  static const double full = 9999;
 }

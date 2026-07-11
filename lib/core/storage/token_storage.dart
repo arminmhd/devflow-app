@@ -1,25 +1,31 @@
+import 'package:devflow/core/storage/storage_keys.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class TokenStorage {
-  final FlutterSecureStorage _storage = FlutterSecureStorage();
+  final FlutterSecureStorage storage;
 
-  Future<String?> getAccessToken() async {
-    return await _storage.read(key: "access_token");
+  TokenStorage(this.storage);
+
+  Future<String?> getAccessToken() {
+    return storage.read(key: StorageKeys.accessToken);
   }
 
-  Future<void> saveAccessToken(String token) async {
-    await _storage.write(key: "access_token", value: token);
+  Future<String?> getRefreshToken() {
+    return storage.read(key: StorageKeys.refreshToken);
   }
 
-  Future<String?> getRefreshToken() async {
-    return await _storage.read(key: "refresh_token");
+  Future<void> saveTokens({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
+    await storage.write(key: StorageKeys.accessToken, value: accessToken);
+
+    await storage.write(key: StorageKeys.refreshToken, value: refreshToken);
   }
 
-  Future<void> saveRefreshToken(String token) async {
-    await _storage.write(key: "refresh_token", value: token);
-  }
+  Future<void> clearTokens() async {
+    await storage.delete(key: StorageKeys.accessToken);
 
-  Future<void> delete(String key) async {
-    await _storage.delete(key: key);
+    await storage.delete(key: StorageKeys.refreshToken);
   }
 }

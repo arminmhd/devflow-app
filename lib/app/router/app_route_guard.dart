@@ -1,4 +1,4 @@
-import 'package:devflow/app/di/injector.dart';
+import 'package:devflow/app/di/service_locator.dart';
 import 'package:devflow/core/storage/token_storage.dart';
 import 'package:devflow/app/router/app_route_paths.dart';
 import 'package:flutter/widgets.dart';

@@ -1,6 +1,5 @@
 import 'package:devflow/app/router/app_route_names.dart';
-import 'package:devflow/core/extension/app_extensions.dart';
-import 'package:devflow/core/utils/app_messenger.dart';
+import 'package:devflow/core/services/app_snackbar_service.dart';
 import 'package:devflow/core/widgets/app_scaffold_widget.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_event.dart';
@@ -50,11 +49,11 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.error != null) {
-          AppMessenger.showError(state.error!, context);
+          AppMessenger.showError(state.error!);
         }
 
         if (state.data != null) {
-          AppMessenger.showSuccess('Signed up successfully', context);
+          AppMessenger.showSuccess('Signed up successfully');
 
           context.go(AppRouteNames.signIn);
         }

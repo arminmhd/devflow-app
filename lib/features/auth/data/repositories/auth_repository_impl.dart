@@ -1,39 +1,64 @@
+import 'package:dartz/dartz.dart';
 import 'package:devflow/core/network/error/failure_mapper.dart';
-import 'package:devflow/features/auth/data/models/user_model.dart';
+import 'package:devflow/core/network/error/failures.dart';
+import 'package:devflow/core/storage/token_storage.dart';
+import 'package:devflow/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:devflow/features/auth/domian/entities/user_entity.dart';
 import 'package:devflow/features/auth/domian/repositories/auth_repository.dart';
-import '../datasources/auth_remote_datasource.dart';
-import '../models/login_response_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDatasource remote;
+  final AuthRemoteDataSource remote;
+  final TokenStorage storage;
 
-  AuthRepositoryImpl(this.remote);
+  AuthRepositoryImpl(this.remote, this.storage);
+
   @override
-  Future<LoginResponseModel> login(String email, String password) async {
+  Future<Either<Failure, UserEntity>> login(
+    String email,
+    String password,
+  ) async {
     try {
-      return await remote.login(email, password);
+      final response = await remote.login(email, password);
+
+      await storage.saveTokens(
+        accessToken: response.access,
+        refreshToken: response.refresh,
+      );
+
+      return Right(response.user.toEntity());
     } catch (e) {
-      throw FailureMapper.map(e);
+      return Left(FailureMapper.map(e));
     }
   }
 
   @override
-  Future<LoginResponseModel> register(
+  Future<Either<Failure, UserEntity>> register(
     String email,
     String password,
     String fullName,
   ) async {
     try {
-      return await remote.register(email, password, fullName);
+      final response = await remote.register(email, password, fullName);
+
+      await storage.saveTokens(
+        accessToken: response.access,
+        refreshToken: response.refresh,
+      );
+
+      return Right(response.user.toEntity());
     } catch (e) {
-      throw FailureMapper.map(e);
+      return Left(FailureMapper.map(e));
     }
   }
 
   @override
-  Future<UserModel> getCurrentUser() async {
-    final response = await remote.getCurrentUser();
+  Future<Either<Failure, UserEntity>> getCurrentUser() async {
+    try {
+      final user = await remote.getCurrentUser();
 
-    return response;
+      return Right(user.toEntity());
+    } catch (e) {
+      return Left(FailureMapper.map(e));
+    }
   }
 }

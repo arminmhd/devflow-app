@@ -7,11 +7,18 @@ class AuthInterceptor extends Interceptor {
   AuthInterceptor(this.storage);
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    final requiresAuth = options.extra['requiresAuth'] ?? true;
+
+    if (!requiresAuth) {
+      return handler.next(options);
+    }
+
     final token = await storage.getAccessToken();
+
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }

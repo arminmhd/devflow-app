@@ -1,11 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-final class AppShadows {
-  const AppShadows._();
-
-  static const instance = AppShadows._();
-
-  List<BoxShadow> get sm => const [
+abstract final class AppShadows {
+  static const sm = <BoxShadow>[
     BoxShadow(
       color: Color(0x1A000000),
       blurRadius: 4,
@@ -14,7 +10,7 @@ final class AppShadows {
     ),
   ];
 
-  List<BoxShadow> get md => const [
+  static const md = <BoxShadow>[
     BoxShadow(
       color: Color(0x1A000000),
       blurRadius: 8,
@@ -23,7 +19,7 @@ final class AppShadows {
     ),
   ];
 
-  List<BoxShadow> get lg => const [
+  static const lg = <BoxShadow>[
     BoxShadow(
       color: Color(0x1A000000),
       blurRadius: 16,
@@ -32,7 +28,7 @@ final class AppShadows {
     ),
   ];
 
-  List<BoxShadow> get xl => const [
+  static const xl = <BoxShadow>[
     BoxShadow(
       color: Color(0x1A000000),
       blurRadius: 24,

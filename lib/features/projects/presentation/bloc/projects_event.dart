@@ -7,3 +7,7 @@ class ProjectTabChanged extends ProjectsEvent {
 
   ProjectTabChanged(this.tab);
 }
+
+class LoadProjectsEvent extends ProjectsEvent {}
+
+class RefreshProjectsEvent extends ProjectsEvent {}

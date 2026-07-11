@@ -1,47 +1,18 @@
+import 'package:devflow/core/design/spacing/app_spacing.dart';
 import 'package:flutter/widgets.dart';
 
-final class AppSpaces {
-  const AppSpaces._();
+abstract final class AppSpaces {
+  static const xs = SizedBox(width: AppSpacing.xs, height: AppSpacing.xs);
 
-  static const instance = AppSpaces._();
+  static const sm = SizedBox(width: AppSpacing.sm, height: AppSpacing.sm);
 
-  // Values
-  static const double xs = 4.0;
-  static const double sm = 8.0;
-  static const double md = 16.0;
-  static const double lg = 20.0;
-  static const double xl = 24.0;
-  static const double xxl = 30.0;
-  static const double xxxl = 48.0;
-  static const double huge = 64.0;
+  static const md = SizedBox(width: AppSpacing.md, height: AppSpacing.md);
 
-  // Square spaces
-  Widget get xsSpace => const SizedBox(width: xs, height: xs);
-  Widget get smSpace => const SizedBox(width: sm, height: sm);
-  Widget get mdSpace => const SizedBox(width: md, height: md);
-  Widget get lgSpace => const SizedBox(width: lg, height: lg);
-  Widget get xlSpace => const SizedBox(width: xl, height: xl);
-  Widget get xxlSpace => const SizedBox(width: xxl, height: xxl);
-  Widget get xxxlSpace => const SizedBox(width: xxxl, height: xxxl);
-  Widget get hugeSpace => const SizedBox(width: huge, height: huge);
+  static const lg = SizedBox(width: AppSpacing.lg, height: AppSpacing.lg);
 
-  // Vertical
-  Widget get vXs => const SizedBox(height: xs);
-  Widget get vSm => const SizedBox(height: sm);
-  Widget get vMd => const SizedBox(height: md);
-  Widget get vLg => const SizedBox(height: lg);
-  Widget get vXl => const SizedBox(height: xl);
-  Widget get vXxl => const SizedBox(height: xxl);
-  Widget get vXxxl => const SizedBox(height: xxxl);
-  Widget get vHuge => const SizedBox(height: huge);
+  static const xl = SizedBox(width: AppSpacing.xl, height: AppSpacing.xl);
 
-  // Horizontal
-  Widget get hXs => const SizedBox(width: xs);
-  Widget get hSm => const SizedBox(width: sm);
-  Widget get hMd => const SizedBox(width: md);
-  Widget get hLg => const SizedBox(width: lg);
-  Widget get hXl => const SizedBox(width: xl);
-  Widget get hXxl => const SizedBox(width: xxl);
-  Widget get hXxxl => const SizedBox(width: xxxl);
-  Widget get hHuge => const SizedBox(width: huge);
+  static const vMd = SizedBox(height: AppSpacing.md);
+
+  static const hMd = SizedBox(width: AppSpacing.md);
 }

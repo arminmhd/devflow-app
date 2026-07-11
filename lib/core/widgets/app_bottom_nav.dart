@@ -49,7 +49,7 @@ class AppBottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: AppBottomNavIcon(
             data: 'assets/icons/more.png',
-            isActive: currentIndex == 3,
+            isActive: currentIndex == 4,
           ),
           label: "More",
         ),

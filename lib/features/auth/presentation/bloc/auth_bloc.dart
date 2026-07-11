@@ -43,7 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
 
-      add(GetCurrentUserEvent());
+      Future.microtask(() => add(GetCurrentUserEvent()));
     } catch (e) {
       final failure = e is Failure ? e : UnknownFailure("Unexpected error");
       emit(state.copyWith(loading: false, error: failure.message));

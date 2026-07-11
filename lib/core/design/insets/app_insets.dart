@@ -1,31 +1,29 @@
 import 'package:flutter/widgets.dart';
 
-final class AppInsets {
+abstract final class AppInsets {
   const AppInsets._();
 
-  static const instance = AppInsets._();
-
   // All
-  EdgeInsets get xs => const EdgeInsets.all(4);
-  EdgeInsets get sm => const EdgeInsets.all(8);
-  EdgeInsets get md => const EdgeInsets.all(12);
-  EdgeInsets get lg => const EdgeInsets.all(16);
-  EdgeInsets get xl => const EdgeInsets.all(24);
+  static const xs = EdgeInsets.all(4);
+  static const sm = EdgeInsets.all(8);
+  static const md = EdgeInsets.all(12);
+  static const lg = EdgeInsets.all(16);
+  static const xl = EdgeInsets.all(24);
 
   // Screen
-  EdgeInsets get screen => const EdgeInsets.all(28);
+  static const screen = EdgeInsets.all(28);
 
   // Horizontal
-  EdgeInsets get hSm => const EdgeInsets.symmetric(horizontal: 8);
-  EdgeInsets get hMd => const EdgeInsets.symmetric(horizontal: 12);
-  EdgeInsets get hLg => const EdgeInsets.symmetric(horizontal: 16);
-  EdgeInsets get hXl => const EdgeInsets.symmetric(horizontal: 24);
-  EdgeInsets get screenH => const EdgeInsets.symmetric(horizontal: 28);
+  static const hSm = EdgeInsets.symmetric(horizontal: 8);
+  static const hMd = EdgeInsets.symmetric(horizontal: 12);
+  static const hLg = EdgeInsets.symmetric(horizontal: 16);
+  static const hXl = EdgeInsets.symmetric(horizontal: 24);
+  static const screenH = EdgeInsets.symmetric(horizontal: 28);
 
   // Vertical
-  EdgeInsets get vSm => const EdgeInsets.symmetric(vertical: 8);
-  EdgeInsets get vMd => const EdgeInsets.symmetric(vertical: 12);
-  EdgeInsets get vLg => const EdgeInsets.symmetric(vertical: 16);
-  EdgeInsets get vXl => const EdgeInsets.symmetric(vertical: 24);
-  EdgeInsets get screenV => const EdgeInsets.symmetric(vertical: 28);
+  static const vSm = EdgeInsets.symmetric(vertical: 8);
+  static const vMd = EdgeInsets.symmetric(vertical: 12);
+  static const vLg = EdgeInsets.symmetric(vertical: 16);
+  static const vXl = EdgeInsets.symmetric(vertical: 24);
+  static const screenV = EdgeInsets.symmetric(vertical: 28);
 }

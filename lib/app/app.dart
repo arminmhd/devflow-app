@@ -1,15 +1,9 @@
-import 'package:devflow/app/di/injector.dart';
+import 'package:devflow/app/bloc/network/network_bloc.dart';
+import 'package:devflow/app/bloc/network/network_state.dart';
+import 'package:devflow/app/di/service_locator.dart';
 import 'package:devflow/app/router/app_router.dart';
-import 'package:devflow/core/network/bloc/network_bloc.dart';
-import 'package:devflow/core/network/bloc/network_state.dart';
-import 'package:devflow/core/services/retry_queue_service.dart';
-import 'package:devflow/core/utils/app_messenger.dart';
+import 'package:devflow/core/services/app_snackbar_service.dart';
 import 'package:devflow/core/theme/app_theme.dart';
-import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:devflow/features/auth/presentation/bloc/auth_event.dart';
-import 'package:devflow/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:devflow/features/projects/presentation/bloc/projects_bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,54 +15,40 @@ class DevFlowApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
+
       minTextAdapt: true,
+
       splitScreenMode: true,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => sl<AuthBloc>()..add(CheckAuthStatusEvent()),
+
+      builder: (context, child) {
+        return BlocProvider(
+          create: (_) => sl<NetworkBloc>(),
+
+          child: BlocListener<NetworkBloc, NetworkState>(
+            listener: (context, state) {
+              if (!state.isConnected) {
+                AppMessenger.showError('You were disconnected');
+              }
+            },
+
+            child: MaterialApp.router(
+              title: 'DevFlow',
+
+              debugShowCheckedModeBanner: false,
+
+              scaffoldMessengerKey: AppMessenger.key,
+
+              theme: AppTheme.lightTheme,
+
+              darkTheme: AppTheme.darkTheme,
+
+              themeMode: ThemeMode.system,
+
+              routerConfig: AppRouter.router,
+            ),
           ),
-
-          BlocProvider<NetworkBloc>(create: (context) => sl<NetworkBloc>()),
-
-          BlocProvider<DashboardBloc>(create: (context) => sl<DashboardBloc>()),
-
-          BlocProvider<ProjectsBloc>(create: (context) => sl<ProjectsBloc>()),
-        ],
-        child: BlocListener<NetworkBloc, NetworkState>(
-          listener: (context, state) {
-            checkConnectivity(state, context);
-          },
-          child: MaterialApp.router(
-            title: 'DevFlow',
-            debugShowCheckedModeBanner: false,
-            scaffoldMessengerKey: AppMessenger.key,
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.system,
-            routerConfig: AppRouter.router,
-          ),
-        ),
-      ),
+        );
+      },
     );
-  }
-
-  Future checkConnectivity(NetworkState state, BuildContext context) async {
-    if (state.isConnected) {
-      final retryQueue = sl<RetryQueueService>();
-      final dio = sl<Dio>();
-
-      for (final request in retryQueue.pendingRequest) {
-        try {
-          await dio.fetch(request);
-        } catch (_) {}
-      }
-
-      retryQueue.clear();
-    }
-
-    if (!state.isConnected) {
-      AppMessenger.showError('You were disconnected', context);
-    }
   }
 }

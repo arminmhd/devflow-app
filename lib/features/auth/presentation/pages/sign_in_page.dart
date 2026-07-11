@@ -1,6 +1,7 @@
 import 'package:devflow/app/router/app_route_names.dart';
-import 'package:devflow/core/extension/app_extensions.dart';
-import 'package:devflow/core/utils/app_messenger.dart';
+import 'package:devflow/core/design/insets/app_insets.dart';
+import 'package:devflow/core/design/spacing/app_spaces.dart';
+import 'package:devflow/core/services/app_snackbar_service.dart';
 import 'package:devflow/core/widgets/app_scaffold_widget.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_event.dart';
@@ -45,11 +46,11 @@ class _SignInPageState extends State<SignInPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.error != null) {
-          AppMessenger.showError(state.error!, context);
+          AppMessenger.showError(state.error!);
         }
 
         if (state.status == AuthStatus.authenticated && state.user == null) {
-          AppMessenger.showSuccess('Authorization successful', context);
+          AppMessenger.showSuccess('Authorization successful');
 
           context.go(AppRouteNames.home);
         }
@@ -57,14 +58,14 @@ class _SignInPageState extends State<SignInPage> {
       child: AppScaffold(
         isSafeArea: true,
         body: SingleChildScrollView(
-          padding: context.padding.screen,
+          padding: AppInsets.screen,
           child: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               return Column(
                 children: [
                   SignInInfo(),
 
-                  context.spacing.vHuge,
+                  AppSpaces.xl,
 
                   SignInForm(
                     formKey: formKey,
@@ -83,15 +84,15 @@ class _SignInPageState extends State<SignInPage> {
                     },
                   ),
 
-                  context.spacing.vLg,
+                  AppSpaces.lg,
 
                   AuthDivider(),
 
-                  context.spacing.vHuge,
+                  AppSpaces.xl,
 
                   AuthSocialButtons(),
 
-                  context.spacing.vMd,
+                  AppSpaces.vMd,
 
                   SignInFooter(
                     onSignUpPressed: () {

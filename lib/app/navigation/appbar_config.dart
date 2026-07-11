@@ -23,8 +23,8 @@ AppBarConfig getAppBarConfig(int index, BuildContext context) {
         leading: InkWell(
           child: Center(
             child: SizedBox(
-              width: 30.w,
-              height: 30.h,
+              width: 25.w,
+              height: 25.h,
               child: Image.asset(
                 'assets/icons/drawer.png',
                 color: context.colors.onPrimary,

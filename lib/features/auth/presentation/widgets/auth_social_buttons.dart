@@ -1,5 +1,4 @@
 import 'package:devflow/core/design/colors/app_colors.dart';
-import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

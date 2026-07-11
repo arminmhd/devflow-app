@@ -19,7 +19,11 @@ class AppScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colors.surface,
       appBar: appBar,
-      body: isSafeArea ? SafeArea(child: body) : body,
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: isSafeArea ? SafeArea(child: body) : body,
+      ),
       bottomNavigationBar: bottomNavigation,
     );
   }

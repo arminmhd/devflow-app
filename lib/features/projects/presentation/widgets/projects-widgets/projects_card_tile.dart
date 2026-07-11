@@ -1,68 +1,89 @@
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
+import 'package:devflow/features/projects/domain/entities/project_entitiy.dart';
 import 'package:flutter/material.dart';
 
 class ProjectsCardTile extends StatelessWidget {
-  const ProjectsCardTile({super.key});
+  final ProjectEntity project;
+
+  const ProjectsCardTile({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: context.padding.md,
       margin: context.padding.vSm,
+      padding: context.padding.md,
       decoration: BoxDecoration(
-        boxShadow: context.shadow.md,
         borderRadius: context.radius.mediumRadius,
-        color: context.colors.surfaceContainer,
+        color: context.colors.surface,
+        border: Border.all(
+          color: project.isArchived
+              ? context.colors.outline
+              : context.colors.primary.withValues(alpha: 0.2),
+        ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Title
+          AppText(project.title, style: context.textStyle.titleMedium),
+
+          context.spacing.vXs,
+
+          // Description
+          AppText(
+            project.description,
+            style: context.textStyle.bodyMedium,
+            maxLines: 2,
+          ),
+
+          context.spacing.vSm,
+
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              // Color indicator
+              Row(
                 children: [
-                  AppText(
-                    'DevFlow Mobile App',
-                    style: context.textStyle.titleSmall,
+                  Container(
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      color: Color(_hexToColor(project.color)),
+                      shape: BoxShape.circle,
+                    ),
                   ),
-
-                  context.spacing.vSm,
-
-                  AppText('Mobile App'),
+                  context.spacing.hSm,
+                  AppText(
+                    project.isArchived ? "Archived" : "Active",
+                    style: context.textStyle.bodySmall.copyWith(
+                      color: project.isArchived
+                          ? context.colors.outline
+                          : context.colors.primary,
+                    ),
+                  ),
                 ],
               ),
 
-              Spacer(),
-
-              Container(
-                padding: context.padding.xs,
-                decoration: BoxDecoration(
-                  borderRadius: context.radius.smallRadius,
-                  color: context.colors.tertiaryContainer.withValues(
-                    alpha: 0.3,
-                  ),
-                ),
-
-                child: AppText(
-                  'In Progress',
-                  style: context.textStyle.bodyMedium.copyWith(
-                    color: context.colors.tertiaryContainer,
-                  ),
-                ),
+              // Created date
+              AppText(
+                _formatDate(project.createdAt),
+                style: context.textStyle.bodySmall,
               ),
             ],
           ),
-
-          context.spacing.vMd,
-
-          Slider(value: 0, onChanged: (value) {}),
-
-          context.spacing.vMd,
-
-          AppText('Date Created'),
         ],
       ),
     );
+  }
+
+  // Convert hex string (#FFAA00) to int color
+  int _hexToColor(String hex) {
+    return int.parse(hex.replaceFirst('#', '0xff'));
+  }
+
+  // Format date
+  String _formatDate(DateTime date) {
+    return "${date.year}/${date.month}/${date.day}";
   }
 }

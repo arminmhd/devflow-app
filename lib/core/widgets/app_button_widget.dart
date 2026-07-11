@@ -1,3 +1,4 @@
+import 'package:devflow/core/design/radius/app_border_radius.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,14 +28,12 @@ class AppButton extends StatelessWidget {
           backgroundColor: context.colors.primary,
           foregroundColor: context.colors.onPrimary,
           elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: context.radius.mediumRadius,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.md),
         ),
         onPressed: loading ? null : onPressed,
         child: loading
             ? const CircularProgressIndicator()
-            : Text(label, style: context.textStyle.titleMedium),
+            : Text(label, style: context.textTheme.titleMedium),
       ),
     );
   }
