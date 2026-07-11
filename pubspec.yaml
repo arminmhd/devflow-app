@@ -43,6 +43,14 @@ dependencies:
   flutter_secure_storage: ^10.3.1
   connectivity_plus: ^7.2.0
   dartz: ^0.10.1
+  injectable: ^3.0.0
+  injectable_generator: ^3.1.0
+  build_runner: ^2.15.1
+  json_annotation: ^4.12.0
+  json_serializable: ^6.14.0
+  freezed_annotation: ^3.1.0
+  freezed: ^4.0.0-dev.3
+  talker: ^5.1.17
 
 dev_dependencies:
   flutter_test:

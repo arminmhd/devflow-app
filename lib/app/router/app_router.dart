@@ -11,7 +11,7 @@ import 'app_route_paths.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: AppRoutePaths.signIn,
+    initialLocation: AppRoutePaths.home,
     redirect: RouteGuard.authRedirect,
     routes: [
       GoRoute(
