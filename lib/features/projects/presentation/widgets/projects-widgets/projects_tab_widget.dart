@@ -5,7 +5,7 @@ import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:devflow/features/projects/presentation/bloc/projects_bloc.dart';
 import 'package:devflow/features/projects/presentation/bloc/projects_event.dart';
 import 'package:devflow/features/projects/presentation/bloc/projects_state.dart';
-import 'package:devflow/features/projects/presentation/enum/project_tab_enum.dart';
+import 'package:devflow/features/projects/domain/enum/project_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,10 +15,10 @@ class ProjectsTabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabs = const [
-      ('All', ProjectTabEnum.all),
-      ('Active', ProjectTabEnum.active),
-      ('Completed', ProjectTabEnum.completed),
-      ('Archived', ProjectTabEnum.archived),
+      ('All', ProjectTab.all),
+      ('Active', ProjectTab.active),
+      ('Completed', ProjectTab.completed),
+      ('Archived', ProjectTab.archived),
     ];
 
     return BlocBuilder<ProjectsBloc, ProjectsState>(

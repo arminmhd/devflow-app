@@ -21,7 +21,6 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
     Emitter<ProjectsState> emit,
   ) {
     emit(state.copyWith(selectedTab: event.tab));
-    add(const LoadProjectsEvent());
   }
 
   Future<void> _onLoadProjects(

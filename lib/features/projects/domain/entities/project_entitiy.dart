@@ -1,10 +1,11 @@
+import 'package:devflow/features/projects/domain/enum/project_status.dart';
 import 'package:equatable/equatable.dart';
 
 class ProjectEntity extends Equatable {
   final int id;
   final String title;
   final String description;
-  final String status;
+  final ProjectStatus status;
   final String color;
   final bool isArchived;
   final DateTime createdAt;

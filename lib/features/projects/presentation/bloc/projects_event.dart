@@ -1,11 +1,11 @@
-import 'package:devflow/features/projects/presentation/enum/project_tab_enum.dart';
+import 'package:devflow/features/projects/domain/enum/project_tab.dart';
 
 abstract class ProjectsEvent {
   const ProjectsEvent();
 }
 
 class ProjectTabChanged extends ProjectsEvent {
-  final ProjectTabEnum tab;
+  final ProjectTab tab;
 
   const ProjectTabChanged(this.tab);
 }

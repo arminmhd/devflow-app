@@ -15,12 +15,10 @@ class ProjectTabContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectsBloc, ProjectsState>(
       builder: (context, state) {
-        // 🔥 1) Loading
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        // 🔥 2) Error
         if (state.error != null) {
           return Center(
             child: AppText(
@@ -32,17 +30,18 @@ class ProjectTabContent extends StatelessWidget {
           );
         }
 
-        // 🔥 3) Empty
-        if (state.projects.isEmpty) {
+        final projects = state.filteredProjects;
+
+        if (projects.isEmpty) {
           return const Center(child: AppText("No projects found"));
         }
 
-        // 🔥 4) Projects list
         return ListView.builder(
           padding: AppInsets.sm,
-          itemCount: state.projects.length,
+          itemCount: projects.length,
           itemBuilder: (context, index) {
-            final project = state.projects[index];
+            final project = projects[index];
+
             return ProjectsCardTile(project: project);
           },
         );

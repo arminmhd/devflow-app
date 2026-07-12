@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:devflow/features/projects/domain/entities/project_entitiy.dart';
+import 'package:devflow/features/projects/domain/enum/project_status.dart';
 
 part 'project_model.g.dart';
 
@@ -10,10 +11,13 @@ class ProjectModel {
   final String description;
   final String status;
   final String color;
+
   @JsonKey(name: 'is_archived')
   final bool isArchived;
+
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
+
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
 
@@ -38,7 +42,7 @@ class ProjectModel {
       id: id,
       title: title,
       description: description,
-      status: status,
+      status: ProjectStatus.fromString(status),
       color: color,
       isArchived: isArchived,
       createdAt: createdAt,
