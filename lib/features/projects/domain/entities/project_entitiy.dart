@@ -1,4 +1,6 @@
-class ProjectEntity {
+import 'package:equatable/equatable.dart';
+
+class ProjectEntity extends Equatable {
   final int id;
   final String title;
   final String description;
@@ -18,4 +20,16 @@ class ProjectEntity {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  @override
+  List<Object?> get props => [
+    id,
+    title,
+    description,
+    status,
+    color,
+    isArchived,
+    createdAt,
+    updatedAt,
+  ];
 }

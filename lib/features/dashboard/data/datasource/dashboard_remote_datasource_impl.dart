@@ -1,26 +1,45 @@
-import 'package:devflow/core/network/api_endpoints.dart';
-import 'package:devflow/features/dashboard/data/datasource/dashboard_remote_datasource.dart';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:talker/talker.dart';
+
 import 'package:devflow/features/dashboard/data/models/dashboard_model.dart';
 import 'package:devflow/features/dashboard/data/models/recent_activity_model.dart';
-import 'package:dio/dio.dart';
+import 'package:devflow/features/dashboard/data/datasource/dashboard_remote_datasource.dart';
 
-class DashboardRemoteDatasourceImpl implements DashboardRemoteDataSource {
-  final Dio dio;
+@LazySingleton(as: DashboardRemoteDataSource)
+class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
+  final Dio client;
+  final Talker talker;
 
-  DashboardRemoteDatasourceImpl(this.dio);
+  DashboardRemoteDataSourceImpl(this.client, this.talker);
 
   @override
   Future<DashboardModel> getDashboard() async {
-    final response = await dio.get(ApiEndpoints.dashboard);
-    return DashboardModel.fromJson(response.data);
+    try {
+      final response = await client.get('/dashboard/');
+
+      return DashboardModel.fromJson(response.data);
+    } catch (e, st) {
+      talker.error('DashboardRemoteDataSourceImpl.getDashboard error', e, st);
+      rethrow;
+    }
   }
 
   @override
   Future<List<RecentActivityModel>> getRecentActivity() async {
-    final response = await dio.get(ApiEndpoints.recentActivity);
-
-    return (response.data as List)
-        .map((e) => RecentActivityModel.fromJson(e))
-        .toList();
+    try {
+      final response = await client.get('/dashboard/recent-activity/');
+      final list = (response.data as List)
+          .map((json) => RecentActivityModel.fromJson(json))
+          .toList();
+      return list;
+    } catch (e, st) {
+      talker.error(
+        'DashboardRemoteDataSourceImpl.getRecentActivity error',
+        e,
+        st,
+      );
+      rethrow;
+    }
   }
 }

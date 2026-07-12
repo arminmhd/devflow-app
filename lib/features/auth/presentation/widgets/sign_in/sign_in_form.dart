@@ -1,71 +1,97 @@
+import 'package:devflow/core/design/spacing/app_spaces.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/utils/app_auth_validators.dart';
 import 'package:devflow/core/widgets/app_button_widget.dart';
 import 'package:devflow/core/widgets/app_input_widget.dart';
+import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:devflow/features/auth/presentation/bloc/auth_event.dart';
+import 'package:devflow/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignInForm extends StatelessWidget {
-  final TextEditingController usernameController;
-  final TextEditingController passwordController;
-  final VoidCallback? onLoginPressed;
-  final VoidCallback? onForgotPassword;
-  final GlobalKey<FormState> formKey;
-  final bool isLoading;
+class SignInForm extends StatefulWidget {
+  const SignInForm({super.key});
 
-  const SignInForm({
-    super.key,
-    required this.usernameController,
-    required this.passwordController,
-    this.isLoading = false,
-    this.onLoginPressed,
-    this.onForgotPassword,
-    required this.formKey,
-  });
+  @override
+  State<SignInForm> createState() => _SignInFormState();
+}
+
+class _SignInFormState extends State<SignInForm> {
+  final formKey = GlobalKey<FormState>();
+
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    if (!formKey.currentState!.validate()) return;
+
+    context.read<AuthBloc>().add(
+      LoginEvent(emailController.text.trim(), passwordController.text.trim()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          AppInput(
-            controller: usernameController,
-            hint: 'Email',
-            fillColor: context.colors.onPrimary.withValues(alpha: .09),
-            prefixIcon: const Icon(Icons.person),
-            validator: AppAuthValidators.email,
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return Form(
+          key: formKey,
+          child: Column(
+            children: [
+              AppInput(
+                controller: emailController,
+                hint: 'Email',
+                prefixIcon: const Icon(Icons.person),
+                validator: AppAuthValidators.email,
+                fillColor: context.colors.onPrimary.withValues(alpha: .09),
+              ),
+
+              AppSpaces.vMd,
+
+              AppInput(
+                controller: passwordController,
+                hint: 'Password',
+                obscure: true,
+                prefixIcon: const Icon(Icons.lock),
+                validator: AppAuthValidators.password,
+                fillColor: context.colors.onPrimary.withValues(alpha: .09),
+              ),
+
+              AppSpaces.lg,
+
+              Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  onTap: () {},
+                  child: const Text('Forgot Password?'),
+                ),
+              ),
+
+              AppSpaces.lg,
+
+              AppButton(
+                label: 'Sign In',
+                loading: state.loading,
+                onPressed: state.loading ? null : _submit,
+              ),
+            ],
           ),
-
-          context.spacing.vMd,
-
-          AppInput(
-            controller: passwordController,
-            hint: 'Password',
-            obscure: true,
-            fillColor: context.colors.onPrimary.withValues(alpha: .09),
-            prefixIcon: const Icon(Icons.lock),
-            validator: AppAuthValidators.password,
-          ),
-
-          context.spacing.vLg,
-
-          Align(
-            alignment: Alignment.centerRight,
-            child: InkWell(
-              onTap: onForgotPassword,
-              child: const Text('Forgot Password?'),
-            ),
-          ),
-
-          context.spacing.vLg,
-
-          AppButton(
-            label: 'Sign In',
-            loading: isLoading,
-            onPressed: isLoading ? null : onLoginPressed,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

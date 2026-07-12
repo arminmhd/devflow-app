@@ -1,5 +1,5 @@
-import 'package:devflow/core/network/api_config.dart';
-import 'package:devflow/core/network/api_endpoints.dart';
+import 'package:devflow/core/network/api/api_config.dart';
+import 'package:devflow/core/network/api/api_endpoints.dart';
 import 'package:devflow/core/storage/token_storage.dart';
 import 'package:dio/dio.dart';
 

@@ -1,43 +1,53 @@
-import 'package:devflow/features/auth/data/models/login_response_model.dart';
-import 'package:devflow/features/auth/data/models/user_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:devflow/features/auth/domain/entities/user_entity.dart';
 
-enum AuthStatus { initial, loading, authenticated, error }
+import 'auth_status.dart';
 
 class AuthState extends Equatable {
   final AuthStatus status;
+
   final bool loading;
-  final UserModel? user;
-  final LoginResponseModel? data;
+
+  final UserEntity? user;
+
   final String? error;
 
   const AuthState({
-    required this.loading,
-    this.data,
-    this.error,
-    this.user,
     required this.status,
+    required this.loading,
+    this.user,
+    this.error,
   });
 
-  factory AuthState.initial() =>
-      const AuthState(status: AuthStatus.initial, loading: false);
+  factory AuthState.initial() {
+    return const AuthState(
+      status: AuthStatus.unauthenticated,
+      loading: false,
+      user: null,
+      error: null,
+    );
+  }
 
   AuthState copyWith({
     AuthStatus? status,
-    UserModel? user,
+
     bool? loading,
-    LoginResponseModel? data,
+
+    UserEntity? user,
+
     String? error,
   }) {
     return AuthState(
       status: status ?? this.status,
+
       loading: loading ?? this.loading,
-      data: data ?? this.data,
-      error: error,
+
       user: user ?? this.user,
+
+      error: error,
     );
   }
 
   @override
-  List<Object?> get props => [status, loading, data, error, user];
+  List<Object?> get props => [status, loading, user, error];
 }

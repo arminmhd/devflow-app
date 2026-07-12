@@ -16,7 +16,7 @@ class ProjectsState extends Equatable {
   });
 
   factory ProjectsState.initial() {
-    return ProjectsState(
+    return const ProjectsState(
       selectedTab: ProjectTabEnum.all,
       projects: [],
       error: null,
@@ -34,10 +34,10 @@ class ProjectsState extends Equatable {
       selectedTab: selectedTab ?? this.selectedTab,
       projects: projects ?? this.projects,
       isLoading: isLoading ?? this.isLoading,
-      error: error ?? this.error,
+      error: error,
     );
   }
 
   @override
-  List<Object> get props => [selectedTab, isLoading, projects];
+  List<Object?> get props => [selectedTab, isLoading, projects, error];
 }

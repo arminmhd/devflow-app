@@ -1,11 +1,22 @@
-import 'package:devflow/features/auth/domian/entities/user_entity.dart';
+import 'package:devflow/features/auth/domain/entities/user_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user_model.g.dart';
+
+@JsonSerializable()
 class UserModel {
   final int id;
+
   final String email;
+
+  @JsonKey(name: 'full_name')
   final String fullName;
+
   final String? avatar;
+
   final String? bio;
+
+  @JsonKey(name: 'is_verified')
   final bool isVerified;
 
   const UserModel({
@@ -17,16 +28,10 @@ class UserModel {
     required this.isVerified,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'] ?? 0,
-      email: json['email'] ?? '',
-      fullName: json['full_name'] ?? '',
-      avatar: json['avatar'],
-      bio: json['bio'],
-      isVerified: json['is_verified'] ?? false,
-    );
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   UserEntity toEntity() {
     return UserEntity(

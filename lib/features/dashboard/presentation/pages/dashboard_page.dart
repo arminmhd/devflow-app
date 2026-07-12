@@ -20,7 +20,7 @@ class _DashboardPageState extends State<DashboardPage> {
       create: (_) => sl<DashboardBloc>()
         ..add(LoadDashboardEvent())
         ..add(LoadRecentActivityEvent()),
-      child: DashboardView(),
+      child: const DashboardView(),
     );
   }
 }

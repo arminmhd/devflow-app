@@ -1,3 +1,4 @@
+import 'package:devflow/core/design/spacing/app_spaces.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +13,13 @@ class SignInFooter extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AppText('Dont have an account?'),
-        context.spacing.hSm,
+        AppSpaces.sm,
 
         GestureDetector(
           onTap: onSignUpPressed,
           child: AppText(
             'Sign Up',
-            style: context.textStyle.bodyLarge.copyWith(
+            style: context.textTheme.bodyLarge?.copyWith(
               color: context.colors.primary,
             ),
           ),

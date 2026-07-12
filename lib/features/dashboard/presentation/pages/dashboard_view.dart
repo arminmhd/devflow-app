@@ -1,3 +1,5 @@
+import 'package:devflow/core/design/insets/app_insets.dart';
+import 'package:devflow/core/design/spacing/app_spaces.dart';
 import 'package:devflow/core/services/app_snackbar_service.dart';
 import 'package:devflow/core/widgets/app_scaffold_widget.dart';
 import 'package:devflow/features/dashboard/presentation/bloc/dashboard_bloc.dart';
@@ -18,38 +20,48 @@ class DashboardView extends StatelessWidget {
       body: BlocListener<DashboardBloc, DashboardState>(
         listener: (context, state) {
           if (state.status == DashboardStatus.error) {
-            AppMessenger.showError('${state.error}');
+            AppMessenger.showError(state.error ?? 'Something went wrong');
           }
         },
         child: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
-            if (state.status == DashboardStatus.loading) {
+            if (state.status == DashboardStatus.loading ||
+                state.status == DashboardStatus.initial) {
               return const Center(child: CircularProgressIndicator());
+            }
+
+            if (state.status == DashboardStatus.error) {
+              return Center(
+                child: Text(
+                  state.error ?? 'Something went wrong',
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
             }
 
             if (state.status == DashboardStatus.loaded && state.data != null) {
               final dashboard = state.data!;
 
               return Padding(
-                padding: context.padding.screen,
+                padding: AppInsets.screen,
                 child: Column(
                   children: [
-                    DashboardInfo(),
+                    const DashboardInfo(),
 
-                    context.spacing.vLg,
+                    AppSpaces.lg,
 
                     DashboardGrid(
                       projectsCount: dashboard.projectsCount,
-                      tasksToday: dashboard.tasksToday,
-                      totalTime: dashboard.totalTime,
-                      totalIncome: dashboard.totalIncome,
+                      tasksToday: dashboard.todayTasks,
+                      totalTime: dashboard.timeTodayMinutes,
+                      totalIncome: dashboard.incomeThisMonth,
                     ),
 
-                    context.spacing.vMd,
+                    AppSpaces.vMd,
 
                     Expanded(
                       child: DashboardActivities(
-                        activities: state.recentActivity!,
+                        activities: state.recentActivity,
                       ),
                     ),
                   ],
@@ -57,7 +69,7 @@ class DashboardView extends StatelessWidget {
               );
             }
 
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ),

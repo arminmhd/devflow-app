@@ -13,22 +13,22 @@ class DevFlowApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-
       minTextAdapt: true,
-
       splitScreenMode: true,
-
-      child: MultiBlocProvider(
-        providers: AppBlocProviders.providers,
-        child: AppListeners(
-          child: MaterialApp.router(
-            routerConfig: AppRouter.router,
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.system,
+      builder: (context, child) {
+        return MultiBlocProvider(
+          providers: AppBlocProviders.providers,
+          child: AppListeners(
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              routerConfig: AppRouter.router,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.system,
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

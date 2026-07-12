@@ -19,7 +19,7 @@ class DashboardGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<DashboardGridItem> homeItems = [
+    final items = [
       DashboardGridItem(
         color: context.colors.outline.withValues(alpha: .40),
         title: projectsCount.toString(),
@@ -53,18 +53,14 @@ class DashboardGrid extends StatelessWidget {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: homeItems.length,
-
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      itemCount: items.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
         childAspectRatio: 1.1,
       ),
-
-      itemBuilder: (context, index) {
-        return homeItems[index];
-      },
+      itemBuilder: (_, index) => items[index],
     );
   }
 }

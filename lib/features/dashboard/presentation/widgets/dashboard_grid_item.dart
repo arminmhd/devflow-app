@@ -1,3 +1,4 @@
+import 'package:devflow/core/design/spacing/app_spaces.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:devflow/features/dashboard/presentation/widgets/dashboard_card_tile.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class DashboardGridItem extends StatelessWidget {
   final String title;
   final String subTitle;
   final IconData icon;
+
   const DashboardGridItem({
     super.key,
     required this.color,
@@ -26,17 +28,23 @@ class DashboardGridItem extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppText(title),
-                context.spacing.vSm,
+                AppSpaces.sm,
                 AppText(subTitle, maxLines: 2),
               ],
             ),
           ),
-          Spacer(),
 
-          Expanded(flex: 1, child: Icon(icon, color: iconColor)),
+          Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Icon(icon, color: iconColor, size: 28),
+            ),
+          ),
         ],
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:devflow/app/bloc/network/network_status.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class NetworkEvent extends Equatable {
+sealed class NetworkEvent extends Equatable {
+  const NetworkEvent();
+
   @override
   List<Object?> get props => [];
 }
@@ -9,7 +11,7 @@ abstract class NetworkEvent extends Equatable {
 final class NetworkStatusChanged extends NetworkEvent {
   final NetworkStatus status;
 
-  NetworkStatusChanged(this.status);
+  const NetworkStatusChanged(this.status);
 
   @override
   List<Object?> get props => [status];

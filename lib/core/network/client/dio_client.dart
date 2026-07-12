@@ -1,4 +1,4 @@
-import 'package:devflow/core/network/api_config.dart';
+import 'package:devflow/core/network/api/api_config.dart';
 import 'package:devflow/core/network/interceptors/auth_interceptor.dart';
 import 'package:devflow/core/network/interceptors/error_interceptor.dart';
 import 'package:devflow/core/network/interceptors/logger_interceptor.dart';

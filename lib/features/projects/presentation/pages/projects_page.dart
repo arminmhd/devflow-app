@@ -16,8 +16,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<ProjectsBloc>()..add(LoadProjectsEvent()),
-      child: ProjectsView(),
+      create: (_) => sl<ProjectsBloc>()..add(const LoadProjectsEvent()),
+      child: const ProjectsView(),
     );
   }
 }

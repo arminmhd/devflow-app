@@ -1,16 +1,27 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-class ConnectivityService {
-  final Connectivity _connectivity = Connectivity();
+import 'package:devflow/app/bloc/network/network_status.dart';
 
-  Future<bool> checkConnection() async {
-    final result = await _connectivity.checkConnectivity();
-    return !result.contains(ConnectivityResult.none);
+class ConnectivityService {
+  final Connectivity connectivity;
+
+  ConnectivityService(this.connectivity);
+
+  Future<NetworkStatus> checkConnection() async {
+    final result = await connectivity.checkConnectivity();
+
+    return _mapStatus(result);
   }
 
-  Stream<bool> get onConnectionChange {
-    return _connectivity.onConnectivityChanged.map(
-      (results) => !results.contains(ConnectivityResult.none),
-    );
+  Stream<NetworkStatus> get onConnectionChange {
+    return connectivity.onConnectivityChanged.map(_mapStatus);
+  }
+
+  NetworkStatus _mapStatus(List<ConnectivityResult> results) {
+    if (results.contains(ConnectivityResult.none)) {
+      return NetworkStatus.disconnected;
+    }
+
+    return NetworkStatus.connected;
   }
 }

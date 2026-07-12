@@ -1,3 +1,6 @@
+import 'package:devflow/core/design/insets/app_insets.dart';
+import 'package:devflow/core/design/radius/app_border_radius.dart';
+import 'package:devflow/core/design/shadows/app_shadwos.dart';
 import 'package:flutter/material.dart';
 
 class DashboardCardTile extends StatelessWidget {
@@ -8,11 +11,11 @@ class DashboardCardTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: context.padding.md,
+      padding: AppInsets.md,
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: context.shadow.sm,
-        borderRadius: context.radius.largeRadius,
+        boxShadow: AppShadows.sm,
+        borderRadius: AppBorderRadius.lg,
         color: color,
       ),
       child: child,

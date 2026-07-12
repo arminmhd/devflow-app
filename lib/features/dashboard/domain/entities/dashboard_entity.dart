@@ -1,15 +1,32 @@
-class DashboardEntity {
-  final int projectsCount;
-  final int tasksToday;
-  final int tasksOverdue;
-  final double totalIncome;
-  final int totalTime;
+import 'package:equatable/equatable.dart';
 
-  DashboardEntity({
+class DashboardEntity extends Equatable {
+  final int projectsCount;
+  final int tasksCount;
+  final int completedTasks;
+  final int todayTasks;
+  final int timeTodayMinutes;
+  final double incomeThisMonth;
+  final int notesCount;
+
+  const DashboardEntity({
     required this.projectsCount,
-    required this.tasksToday,
-    required this.tasksOverdue,
-    required this.totalIncome,
-    required this.totalTime,
+    required this.tasksCount,
+    required this.completedTasks,
+    required this.todayTasks,
+    required this.timeTodayMinutes,
+    required this.incomeThisMonth,
+    required this.notesCount,
   });
+
+  @override
+  List<Object?> get props => [
+    projectsCount,
+    tasksCount,
+    completedTasks,
+    todayTasks,
+    timeTodayMinutes,
+    incomeThisMonth,
+    notesCount,
+  ];
 }

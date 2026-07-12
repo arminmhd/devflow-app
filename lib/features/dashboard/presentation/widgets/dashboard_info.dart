@@ -1,3 +1,4 @@
+import 'package:devflow/core/design/spacing/app_spaces.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:devflow/features/auth/presentation/bloc/auth_bloc.dart';
@@ -18,7 +19,7 @@ class DashboardInfo extends StatelessWidget {
         children: [
           AppText('Good Morning, ${user?.fullName}'),
 
-          context.spacing.vMd,
+          AppSpaces.vMd,
 
           AppText('Lets make today productive'),
         ],

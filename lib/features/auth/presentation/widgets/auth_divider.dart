@@ -1,3 +1,4 @@
+import 'package:devflow/core/design/insets/app_insets.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +10,7 @@ class AuthDivider extends StatelessWidget {
     return Row(
       children: [
         Expanded(child: Divider(thickness: 1)),
-        Padding(
-          padding: context.padding.hMd,
-          child: AppText('or continue with'),
-        ),
+        Padding(padding: AppInsets.hMd, child: AppText('or continue with')),
         Expanded(child: Divider(thickness: 1)),
       ],
     );

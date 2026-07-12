@@ -1,96 +1,123 @@
-import 'package:devflow/features/auth/domian/usecases/get_current_user_usecase.dart';
+import 'package:devflow/features/auth/domain/usecases/check_auth_status_use_case.dart';
+import 'package:devflow/features/auth/domain/usecases/get_current_user_usecase.dart';
+import 'package:devflow/features/auth/domain/usecases/login_usecase.dart';
+import 'package:devflow/features/auth/domain/usecases/register_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+
 import 'auth_event.dart';
 import 'auth_state.dart';
-import '../../../../core/network/error/failures.dart';
-import '../../../../core/storage/token_storage.dart';
-import '../../domian/usecases/login_usecase.dart';
-import '../../domian/usecases/register_usecase.dart';
+import 'auth_status.dart';
 
+@injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
   final GetCurrentUserUseCase currentUserUseCase;
-  final TokenStorage storage;
+  final CheckAuthStatusUseCase checkAuthStatusUseCase;
 
   AuthBloc({
     required this.loginUseCase,
     required this.registerUseCase,
-    required this.storage,
     required this.currentUserUseCase,
+    required this.checkAuthStatusUseCase,
   }) : super(AuthState.initial()) {
     on<LoginEvent>(_onLogin);
+
     on<RegisterEvent>(_onRegister);
+
     on<GetCurrentUserEvent>(_onGetCurrentUser);
+
     on<CheckAuthStatusEvent>(_onCheckAuthStatus);
   }
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     emit(state.copyWith(loading: true, error: null));
 
-    try {
-      final result = await loginUseCase(event.email, event.password);
+    final result = await loginUseCase(event.email, event.password);
 
-      await storage.saveAccessToken(result.access);
-      await storage.saveRefreshToken(result.refresh);
+    result.fold(
+      (failure) {
+        emit(state.copyWith(loading: false, error: failure.message));
+      },
 
-      emit(
-        state.copyWith(
-          status: AuthStatus.authenticated,
-          loading: false,
-          data: result,
-          error: null,
-        ),
-      );
+      (session) {
+        emit(
+          state.copyWith(
+            status: AuthStatus.authenticated,
+            loading: false,
+            user: session.user,
+            error: null,
+          ),
+        );
 
-      Future.microtask(() => add(GetCurrentUserEvent()));
-    } catch (e) {
-      final failure = e is Failure ? e : UnknownFailure("Unexpected error");
-      emit(state.copyWith(loading: false, error: failure.message));
-    }
+        add(GetCurrentUserEvent());
+      },
+    );
   }
 
   Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
     emit(state.copyWith(loading: true, error: null));
 
-    try {
-      final result = await registerUseCase(
-        event.email,
-        event.password,
-        event.fullName,
-      );
+    final result = await registerUseCase(
+      event.email,
+      event.password,
+      event.fullName,
+    );
 
-      emit(state.copyWith(loading: false, data: result, error: null));
-    } catch (e) {
-      final failure = e is Failure ? e : UnknownFailure("Unexpected error");
-      emit(state.copyWith(loading: false, error: failure.message));
-    }
+    result.fold(
+      (failure) {
+        emit(state.copyWith(loading: false, error: failure.message));
+      },
+
+      (session) {
+        emit(
+          state.copyWith(
+            status: AuthStatus.authenticated,
+            loading: false,
+            user: session.user,
+            error: null,
+          ),
+        );
+      },
+    );
   }
 
   Future<void> _onCheckAuthStatus(
     CheckAuthStatusEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final access = await storage.getAccessToken();
+    final result = await checkAuthStatusUseCase();
 
-    if (access == null) {
-      emit(AuthState.initial());
-      return;
-    }
+    result.fold(
+      (failure) {
+        emit(AuthState.initial());
+      },
 
-    add(GetCurrentUserEvent());
+      (authenticated) {
+        if (authenticated) {
+          add(GetCurrentUserEvent());
+        } else {
+          emit(AuthState.initial());
+        }
+      },
+    );
   }
 
   Future<void> _onGetCurrentUser(
     GetCurrentUserEvent event,
     Emitter<AuthState> emit,
   ) async {
-    try {
-      final user = await currentUserUseCase();
-      emit(state.copyWith(user: user, error: null));
-    } catch (e) {
-      final failure = e is Failure ? e : UnknownFailure("Unexpected error!");
-      emit(state.copyWith(error: failure.message));
-    }
+    final result = await currentUserUseCase();
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith(error: failure.message));
+      },
+
+      (user) {
+        emit(state.copyWith(user: user, error: null));
+      },
+    );
   }
 }

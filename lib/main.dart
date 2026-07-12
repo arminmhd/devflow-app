@@ -1,5 +1,5 @@
 import 'package:devflow/app/app.dart';
-import 'package:devflow/app/di/injector.dart';
+import 'package:devflow/app/di/service_locator.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

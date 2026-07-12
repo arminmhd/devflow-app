@@ -1,40 +1,48 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:devflow/features/projects/domain/entities/project_entitiy.dart';
 
-class ProjectModel extends ProjectEntity {
-  ProjectModel({
-    required super.id,
-    required super.title,
-    required super.description,
-    required super.status,
-    required super.color,
-    required super.isArchived,
-    required super.createdAt,
-    required super.updatedAt,
+part 'project_model.g.dart';
+
+@JsonSerializable()
+class ProjectModel {
+  final int id;
+  final String title;
+  final String description;
+  final String status;
+  final String color;
+  @JsonKey(name: 'is_archived')
+  final bool isArchived;
+  @JsonKey(name: 'created_at')
+  final DateTime createdAt;
+  @JsonKey(name: 'updated_at')
+  final DateTime updatedAt;
+
+  const ProjectModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.status,
+    required this.color,
+    required this.isArchived,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
-  factory ProjectModel.fromJson(Map<String, dynamic> json) {
-    return ProjectModel(
-      id: json['id'] ?? 0,
-      title: json['title'],
-      status: json['status'] ?? '',
-      description: json['description'] ?? '',
-      color: json['color'] ?? '#000000',
-      isArchived: json['is_archived'] ?? false,
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
-    );
-  }
+  factory ProjectModel.fromJson(Map<String, dynamic> json) =>
+      _$ProjectModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      "id": id,
-      "title": title,
-      "description": description,
-      "status": status,
-      "color": color,
-      "is_archived": isArchived,
-      "created_at": createdAt.toIso8601String(),
-      "updated_at": updatedAt.toIso8601String(),
-    };
+  Map<String, dynamic> toJson() => _$ProjectModelToJson(this);
+
+  ProjectEntity toEntity() {
+    return ProjectEntity(
+      id: id,
+      title: title,
+      description: description,
+      status: status,
+      color: color,
+      isArchived: isArchived,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
   }
 }

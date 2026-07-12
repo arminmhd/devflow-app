@@ -1,3 +1,5 @@
+import 'package:devflow/core/design/insets/app_insets.dart';
+import 'package:devflow/core/design/radius/app_border_radius.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:devflow/features/projects/presentation/bloc/projects_bloc.dart';
@@ -12,73 +14,56 @@ class ProjectsTabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tabs = const [
+      ('All', ProjectTabEnum.all),
+      ('Active', ProjectTabEnum.active),
+      ('Completed', ProjectTabEnum.completed),
+      ('Archived', ProjectTabEnum.archived),
+    ];
+
     return BlocBuilder<ProjectsBloc, ProjectsState>(
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _projectTabBuilder(
-              context,
-              title: 'All',
-              selectedTab: state.selectedTab,
-              tab: ProjectTabEnum.all,
-            ),
-            _projectTabBuilder(
-              context,
-              title: 'Active',
-              selectedTab: state.selectedTab,
-              tab: ProjectTabEnum.active,
-            ),
-            _projectTabBuilder(
-              context,
-              title: 'Completed',
-              selectedTab: state.selectedTab,
-              tab: ProjectTabEnum.completed,
-            ),
-            _projectTabBuilder(
-              context,
-              title: 'Archived',
-              selectedTab: state.selectedTab,
-              tab: ProjectTabEnum.archived,
-            ),
-          ],
+          children: tabs.map((tabData) {
+            final title = tabData.$1;
+            final tab = tabData.$2;
+
+            final isSelected = tab == state.selectedTab;
+
+            return InkWell(
+              onTap: () {
+                context.read<ProjectsBloc>().add(ProjectTabChanged(tab));
+              },
+              borderRadius: AppBorderRadius.sm,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 180),
+                padding: AppInsets.md,
+                decoration: BoxDecoration(
+                  borderRadius: AppBorderRadius.sm,
+                  color: isSelected
+                      ? context.colors.primary.withValues(alpha: 0.05)
+                      : null,
+                  border: isSelected
+                      ? Border(
+                          bottom: BorderSide(
+                            color: context.colors.primary,
+                            width: 1.5,
+                          ),
+                        )
+                      : null,
+                ),
+                child: AppText(
+                  title,
+                  style: context.textTheme.titleMedium?.copyWith(
+                    color: isSelected ? context.colors.primary : null,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
         );
       },
     );
   }
-}
-
-Widget _projectTabBuilder(
-  BuildContext context, {
-  required String title,
-  required ProjectTabEnum tab,
-  required ProjectTabEnum selectedTab,
-}) {
-  final isSelected = tab == selectedTab;
-
-  return InkWell(
-    onTap: () {
-      context.read<ProjectsBloc>().add(ProjectTabChanged(tab));
-    },
-    child: Container(
-      padding: context.padding.md,
-      decoration: BoxDecoration(
-        borderRadius: context.radius.smallRadius,
-        color: isSelected
-            ? context.colors.primary.withValues(alpha: 0.03)
-            : null,
-        border: isSelected
-            ? Border(
-                bottom: BorderSide(color: context.colors.primary, width: 1),
-              )
-            : null,
-      ),
-      child: AppText(
-        title,
-        style: context.textStyle.titleMedium.copyWith(
-          color: isSelected ? context.colors.primary : null,
-        ),
-      ),
-    ),
-  );
 }

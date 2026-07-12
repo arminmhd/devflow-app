@@ -7,10 +7,14 @@ class NetworkState extends Equatable {
   const NetworkState({required this.status});
 
   factory NetworkState.initial() {
-    return NetworkState(status: NetworkStatus.unknown);
+    return const NetworkState(status: NetworkStatus.unknown);
   }
 
-  bool get isConnected => status == NetworkStatus.connected;
+  bool get isOnline => status == NetworkStatus.connected;
+
+  NetworkState copyWith({NetworkStatus? status}) {
+    return NetworkState(status: status ?? this.status);
+  }
 
   @override
   List<Object?> get props => [status];

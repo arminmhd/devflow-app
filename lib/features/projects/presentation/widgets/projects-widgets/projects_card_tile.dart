@@ -1,7 +1,11 @@
+import 'package:devflow/core/design/insets/app_insets.dart';
+import 'package:devflow/core/design/radius/app_border_radius.dart';
+import 'package:devflow/core/design/spacing/app_spaces.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:devflow/features/projects/domain/entities/project_entitiy.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ProjectsCardTile extends StatelessWidget {
   final ProjectEntity project;
@@ -10,80 +14,88 @@ class ProjectsCardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: context.padding.vSm,
-      padding: context.padding.md,
-      decoration: BoxDecoration(
-        borderRadius: context.radius.mediumRadius,
-        color: context.colors.surface,
-        border: Border.all(
-          color: project.isArchived
-              ? context.colors.outline
-              : context.colors.primary.withValues(alpha: 0.2),
+    return InkWell(
+      borderRadius: AppBorderRadius.md,
+      onTap: () {},
+      child: Container(
+        margin: AppInsets.vSm,
+        padding: AppInsets.md,
+        decoration: BoxDecoration(
+          borderRadius: AppBorderRadius.md,
+          color: context.colors.surface,
+          border: Border.all(
+            color: project.isArchived
+                ? context.colors.outline
+                : context.colors.primary.withValues(alpha: 0.2),
+          ),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Title
-          AppText(project.title, style: context.textStyle.titleMedium),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Title
+            AppText(project.title, style: context.textTheme.titleMedium),
 
-          context.spacing.vXs,
+            AppSpaces.xs,
 
-          // Description
-          AppText(
-            project.description,
-            style: context.textStyle.bodyMedium,
-            maxLines: 2,
-          ),
+            // Description
+            AppText(
+              project.description,
+              style: context.textTheme.bodyMedium,
+              maxLines: 2,
+            ),
 
-          context.spacing.vSm,
+            AppSpaces.sm,
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Color indicator
-              Row(
-                children: [
-                  Container(
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      color: Color(_hexToColor(project.color)),
-                      shape: BoxShape.circle,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Color indicator + status
+                Row(
+                  children: [
+                    Container(
+                      width: 12,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        color: _safeHexColor(project.color),
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ),
-                  context.spacing.hSm,
-                  AppText(
-                    project.isArchived ? "Archived" : "Active",
-                    style: context.textStyle.bodySmall.copyWith(
-                      color: project.isArchived
-                          ? context.colors.outline
-                          : context.colors.primary,
+                    AppSpaces.sm,
+                    AppText(
+                      project.isArchived ? "Archived" : "Active",
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: project.isArchived
+                            ? context.colors.outline
+                            : context.colors.primary,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              // Created date
-              AppText(
-                _formatDate(project.createdAt),
-                style: context.textStyle.bodySmall,
-              ),
-            ],
-          ),
-        ],
+                // Created date
+                AppText(
+                  _formatDate(project.createdAt),
+                  style: context.textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // Convert hex string (#FFAA00) to int color
-  int _hexToColor(String hex) {
-    return int.parse(hex.replaceFirst('#', '0xff'));
+  // Safe hex → Color
+  Color _safeHexColor(String hex) {
+    try {
+      return Color(int.parse(hex.replaceFirst('#', '0xff')));
+    } catch (_) {
+      return Colors.grey;
+    }
   }
 
-  // Format date
+  // Format date using intl
   String _formatDate(DateTime date) {
-    return "${date.year}/${date.month}/${date.day}";
+    return DateFormat("yyyy/MM/dd").format(date);
   }
 }

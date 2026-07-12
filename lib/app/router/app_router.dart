@@ -1,8 +1,8 @@
 import 'package:devflow/app/navigation/navigation_shell.dart';
 import 'package:devflow/app/router/app_route_guard.dart';
 import 'package:devflow/app/router/app_route_names.dart';
-import 'package:devflow/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:devflow/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:devflow/features/auth/presentation/pages/sign-in/sign_in_page.dart';
+import 'package:devflow/features/auth/presentation/pages/sign-up/sign_up_page.dart';
 import 'package:devflow/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:devflow/features/projects/presentation/pages/projects_page.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +11,13 @@ import 'app_route_paths.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: AppRoutePaths.home,
+    initialLocation: AppRoutePaths.signIn,
     redirect: RouteGuard.authRedirect,
     routes: [
       GoRoute(
         path: AppRoutePaths.signIn,
         name: AppRouteNames.signIn,
-        builder: (_, _) => const SignInPage(),
+        builder: (_, _) => SignInPage(),
       ),
       GoRoute(
         path: AppRoutePaths.signUp,
