@@ -12,10 +12,3 @@ LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
       access: json['access'] as String,
       refresh: json['refresh'] as String,
     );
-
-Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
-    <String, dynamic>{
-      'user': instance.user,
-      'access': instance.access,
-      'refresh': instance.refresh,
-    };

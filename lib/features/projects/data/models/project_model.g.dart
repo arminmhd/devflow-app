@@ -12,7 +12,6 @@ ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) => ProjectModel(
   description: json['description'] as String,
   status: json['status'] as String,
   color: json['color'] as String,
-  isArchived: json['is_archived'] as bool,
   createdAt: DateTime.parse(json['created_at'] as String),
   updatedAt: DateTime.parse(json['updated_at'] as String),
 );
@@ -24,7 +23,6 @@ Map<String, dynamic> _$ProjectModelToJson(ProjectModel instance) =>
       'description': instance.description,
       'status': instance.status,
       'color': instance.color,
-      'is_archived': instance.isArchived,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
     };

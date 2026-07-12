@@ -21,28 +21,28 @@ class DashboardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       DashboardGridItem(
-        color: context.colors.outline.withValues(alpha: .40),
+        color: context.colors.outline.withValues(alpha: .20),
         title: projectsCount.toString(),
         subTitle: 'Active projects',
         icon: Icons.list_alt,
-        iconColor: context.colors.outline,
+        iconColor: context.colors.outlineVariant,
       ),
       DashboardGridItem(
-        color: context.colors.secondaryContainer.withValues(alpha: .40),
+        color: context.colors.secondaryContainer.withValues(alpha: .20),
         title: Formatters.number(tasksToday),
         subTitle: "Today's Tasks",
         icon: Icons.task_alt,
         iconColor: context.colors.secondaryContainer,
       ),
       DashboardGridItem(
-        color: context.colors.tertiaryContainer.withValues(alpha: .40),
+        color: context.colors.tertiaryContainer.withValues(alpha: .20),
         title: Formatters.time(totalTime),
         subTitle: "Time Today",
         icon: Icons.timer,
         iconColor: context.colors.tertiaryContainer,
       ),
       DashboardGridItem(
-        color: context.colors.secondary.withValues(alpha: 0.40),
+        color: context.colors.secondary.withValues(alpha: 0.20),
         title: Formatters.income(totalIncome),
         subTitle: "Income This Month",
         icon: Icons.attach_money,

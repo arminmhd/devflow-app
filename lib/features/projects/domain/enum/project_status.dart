@@ -16,4 +16,17 @@ enum ProjectStatus {
         return ProjectStatus.active;
     }
   }
+
+  String get value {
+    switch (this) {
+      case ProjectStatus.active:
+        return 'active';
+
+      case ProjectStatus.completed:
+        return 'completed';
+
+      case ProjectStatus.archived:
+        return 'archived';
+    }
+  }
 }

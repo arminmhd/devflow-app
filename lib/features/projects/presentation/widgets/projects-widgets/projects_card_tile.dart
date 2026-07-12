@@ -4,7 +4,9 @@ import 'package:devflow/core/design/spacing/app_spaces.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
 import 'package:devflow/features/projects/domain/entities/project_entitiy.dart';
+import 'package:devflow/features/projects/domain/extension/projects_status_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class ProjectsCardTile extends StatelessWidget {
@@ -23,11 +25,7 @@ class ProjectsCardTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: AppBorderRadius.md,
           color: context.colors.surface,
-          border: Border.all(
-            color: project.isArchived
-                ? context.colors.outline
-                : context.colors.primary.withValues(alpha: 0.2),
-          ),
+          border: Border.all(color: context.colors.outline),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,20 +51,18 @@ class ProjectsCardTile extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      width: 12,
-                      height: 12,
+                      width: 12.w,
+                      height: 12.h,
                       decoration: BoxDecoration(
-                        color: _safeHexColor(project.color),
+                        color: project.status.color(context),
                         shape: BoxShape.circle,
                       ),
                     ),
                     AppSpaces.sm,
                     AppText(
-                      project.isArchived ? "Archived" : "Active",
+                      project.status.label,
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: project.isArchived
-                            ? context.colors.outline
-                            : context.colors.primary,
+                        color: project.status.color(context),
                       ),
                     ),
                   ],
@@ -83,15 +79,6 @@ class ProjectsCardTile extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  // Safe hex → Color
-  Color _safeHexColor(String hex) {
-    try {
-      return Color(int.parse(hex.replaceFirst('#', '0xff')));
-    } catch (_) {
-      return Colors.grey;
-    }
   }
 
   // Format date using intl

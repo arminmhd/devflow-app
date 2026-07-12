@@ -1,5 +1,7 @@
+import 'package:devflow/core/design/colors/app_colors.dart';
 import 'package:devflow/core/design/insets/app_insets.dart';
 import 'package:devflow/core/design/spacing/app_spaces.dart';
+import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/services/app_snackbar_service.dart';
 import 'package:devflow/core/widgets/app_scaffold_widget.dart';
 import 'package:devflow/features/dashboard/presentation/bloc/dashboard_bloc.dart';
@@ -23,28 +25,31 @@ class DashboardView extends StatelessWidget {
             AppMessenger.showError(state.error ?? 'Something went wrong');
           }
         },
-        child: BlocBuilder<DashboardBloc, DashboardState>(
-          builder: (context, state) {
-            if (state.status == DashboardStatus.loading ||
-                state.status == DashboardStatus.initial) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        child: Padding(
+          padding: AppInsets.screen,
+          child: BlocBuilder<DashboardBloc, DashboardState>(
+            builder: (context, state) {
+              if (state.status == DashboardStatus.loading ||
+                  state.status == DashboardStatus.initial) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-            if (state.status == DashboardStatus.error) {
-              return Center(
-                child: Text(
-                  state.error ?? 'Something went wrong',
-                  style: TextStyle(color: Colors.red),
-                ),
-              );
-            }
+              if (state.status == DashboardStatus.error) {
+                return Center(
+                  child: Text(
+                    state.error ?? 'Something went wrong',
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      color: AppColors.error,
+                    ),
+                  ),
+                );
+              }
 
-            if (state.status == DashboardStatus.loaded && state.data != null) {
-              final dashboard = state.data!;
+              if (state.status == DashboardStatus.loaded &&
+                  state.data != null) {
+                final dashboard = state.data!;
 
-              return Padding(
-                padding: AppInsets.screen,
-                child: Column(
+                return Column(
                   children: [
                     const DashboardInfo(),
 
@@ -65,12 +70,12 @@ class DashboardView extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              );
-            }
+                );
+              }
 
-            return const SizedBox.shrink();
-          },
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       ),
     );

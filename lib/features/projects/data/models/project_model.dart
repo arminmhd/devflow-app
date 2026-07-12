@@ -12,9 +12,6 @@ class ProjectModel {
   final String status;
   final String color;
 
-  @JsonKey(name: 'is_archived')
-  final bool isArchived;
-
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
 
@@ -27,7 +24,6 @@ class ProjectModel {
     required this.description,
     required this.status,
     required this.color,
-    required this.isArchived,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -44,7 +40,6 @@ class ProjectModel {
       description: description,
       status: ProjectStatus.fromString(status),
       color: color,
-      isArchived: isArchived,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );

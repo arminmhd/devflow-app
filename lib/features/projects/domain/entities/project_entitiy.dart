@@ -7,7 +7,7 @@ class ProjectEntity extends Equatable {
   final String description;
   final ProjectStatus status;
   final String color;
-  final bool isArchived;
+
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -17,7 +17,6 @@ class ProjectEntity extends Equatable {
     required this.description,
     required this.status,
     required this.color,
-    required this.isArchived,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -29,7 +28,6 @@ class ProjectEntity extends Equatable {
     description,
     status,
     color,
-    isArchived,
     createdAt,
     updatedAt,
   ];
