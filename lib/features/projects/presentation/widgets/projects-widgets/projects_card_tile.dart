@@ -44,7 +44,7 @@ class ProjectsCardTile extends StatelessWidget {
             AppSpaces.xs,
 
             AppText(
-              project.description,
+              project.subtitle,
               maxLines: 2,
               style: context.textTheme.bodyMedium?.copyWith(
                 color: colors.onSurfaceVariant,

@@ -26,7 +26,7 @@ class ProjectsTabWidget extends StatelessWidget {
     return BlocBuilder<ProjectsBloc, ProjectsState>(
       builder: (context, state) {
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: tabs.map((tabData) {
             final title = tabData.$1;
             final tab = tabData.$2;

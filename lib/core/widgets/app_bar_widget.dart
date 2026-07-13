@@ -7,13 +7,20 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? actions;
   final Widget? leading;
+  final VoidCallback? onLeadingPressed;
 
-  const AppBarWidget({super.key, this.title, this.actions, this.leading});
+  const AppBarWidget({
+    super.key,
+    this.title,
+    this.actions,
+    this.leading,
+    this.onLeadingPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppInsets.screenH,
+      padding: AppInsets.screenAppBar,
       child: AppBar(
         elevation: 0,
         centerTitle: false,
@@ -21,7 +28,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ? AppText(title!, style: context.textTheme.titleLarge)
             : null,
         actions: actions,
-        leading: leading,
+        leading: leading != null
+            ? IconButton(
+                onPressed: onLeadingPressed,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                icon: leading!,
+              )
+            : null,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
         shadowColor: Colors.transparent,

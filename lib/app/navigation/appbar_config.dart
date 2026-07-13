@@ -7,12 +7,15 @@ import 'package:go_router/go_router.dart';
 class AppBarConfig {
   final String title;
   final List<Widget> actions;
+
   final Widget? leading;
+  final VoidCallback? onLeadingPressed;
 
   const AppBarConfig({
     required this.title,
     this.actions = const [],
     this.leading,
+    this.onLeadingPressed,
   });
 }
 
@@ -23,15 +26,13 @@ AppBarConfig getAppBarConfig(BuildContext context) {
     return AppBarConfig(
       title: "Dashboard",
       actions: [const Icon(Icons.notifications)],
-      leading: InkWell(
-        child: Center(
-          child: SizedBox(
-            width: 25.w,
-            height: 25.h,
-            child: Image.asset(
-              'assets/icons/drawer.png',
-              color: context.colors.onSurface,
-            ),
+      leading: Center(
+        child: SizedBox(
+          width: 25.w,
+          height: 25.h,
+          child: Image.asset(
+            'assets/icons/drawer.png',
+            color: context.colors.onSurface,
           ),
         ),
       ),
@@ -46,10 +47,8 @@ AppBarConfig getAppBarConfig(BuildContext context) {
     return AppBarConfig(
       title: "Project Detail",
       actions: [Icon(Icons.more_vert)],
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () => context.pop(),
-      ),
+      leading: const Icon(Icons.arrow_back),
+      onLeadingPressed: () => context.pop(),
     );
   }
 

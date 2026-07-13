@@ -14,6 +14,8 @@ class ProjectDetailTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     final tabs = const [
       ('Overview', ProjectDetailTab.overview),
       ('Tasks', ProjectDetailTab.tasks),
@@ -24,7 +26,7 @@ class ProjectDetailTabBar extends StatelessWidget {
     return BlocBuilder<ProjectDetailBloc, ProjectDetailState>(
       builder: (context, state) {
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: tabs.map((tabData) {
             final title = tabData.$1;
             final tab = tabData.$2;
@@ -44,21 +46,21 @@ class ProjectDetailTabBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: AppBorderRadius.sm,
                   color: isSelected
-                      ? context.colors.primary.withValues(alpha: 0.05)
-                      : null,
+                      ? colors.primaryContainer
+                      : Colors.transparent,
                   border: isSelected
                       ? Border(
-                          bottom: BorderSide(
-                            color: context.colors.primary,
-                            width: 1.5,
-                          ),
+                          bottom: BorderSide(color: colors.primary, width: 2),
                         )
                       : null,
                 ),
                 child: AppText(
                   title,
                   style: context.textTheme.titleMedium?.copyWith(
-                    color: isSelected ? context.colors.primary : null,
+                    color: isSelected
+                        ? colors.onPrimaryContainer
+                        : colors.onSurfaceVariant,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                   ),
                 ),
               ),

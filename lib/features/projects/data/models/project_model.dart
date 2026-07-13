@@ -1,6 +1,6 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:devflow/features/projects/domain/entities/project_entitiy.dart';
 import 'package:devflow/features/projects/domain/enum/project_status.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'project_model.g.dart';
 
@@ -8,24 +8,22 @@ part 'project_model.g.dart';
 class ProjectModel {
   final int id;
   final String title;
-  final String description;
+  final String subtitle;
   final String status;
   final String color;
+  final int progress;
 
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
 
-  @JsonKey(name: 'updated_at')
-  final DateTime updatedAt;
-
   const ProjectModel({
     required this.id,
     required this.title,
-    required this.description,
+    required this.subtitle,
     required this.status,
     required this.color,
+    required this.progress,
     required this.createdAt,
-    required this.updatedAt,
   });
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) =>
@@ -37,11 +35,11 @@ class ProjectModel {
     return ProjectEntity(
       id: id,
       title: title,
-      description: description,
+      subtitle: subtitle,
       status: ProjectStatus.fromString(status),
       color: color,
+      progress: progress,
       createdAt: createdAt,
-      updatedAt: updatedAt,
     );
   }
 }

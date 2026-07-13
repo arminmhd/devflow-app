@@ -12,6 +12,7 @@ abstract final class AppInsets {
 
   // Screen
   static const screen = EdgeInsets.all(28);
+  static const screenAppBar = EdgeInsets.symmetric(horizontal: 12);
 
   // Horizontal
   static const hSm = EdgeInsets.symmetric(horizontal: 8);

@@ -19,6 +19,7 @@ class NavigationShell extends StatelessWidget {
         title: appBarConfig.title,
         leading: appBarConfig.leading,
         actions: appBarConfig.actions,
+        onLeadingPressed: appBarConfig.onLeadingPressed,
       ),
       body: shell,
       bottomNavigation: AppBottomNav(
