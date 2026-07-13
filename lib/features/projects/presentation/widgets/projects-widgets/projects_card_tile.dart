@@ -1,3 +1,4 @@
+import 'package:devflow/app/router/app_route_names.dart';
 import 'package:devflow/core/design/insets/app_insets.dart';
 import 'package:devflow/core/design/radius/app_border_radius.dart';
 import 'package:devflow/core/design/spacing/app_spaces.dart';
@@ -7,6 +8,7 @@ import 'package:devflow/features/projects/domain/entities/project_entitiy.dart';
 import 'package:devflow/features/projects/domain/extension/projects_status_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class ProjectsCardTile extends StatelessWidget {
@@ -18,7 +20,12 @@ class ProjectsCardTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: AppBorderRadius.md,
-      onTap: () {},
+      onTap: () {
+        context.goNamed(
+          AppRouteNames.projectDetail,
+          pathParameters: {'id': project.id.toString()},
+        );
+      },
       child: Container(
         margin: AppInsets.vSm,
         padding: AppInsets.md,

@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 class ProjectsState extends Equatable {
   final ProjectTab selectedTab;
   final String? error;
-  final List<ProjectEntity> projects; // همه پروژه‌ها
+  final List<ProjectEntity> projects;
   final bool isLoading;
 
   const ProjectsState({

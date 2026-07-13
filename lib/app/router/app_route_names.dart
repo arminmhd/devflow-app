@@ -7,4 +7,7 @@ abstract final class AppRouteNames {
   static const String tasks = 'tasks';
   static const String timer = 'timer';
   static const String more = 'more';
+
+  //child pages
+  static const String projectDetail = 'projectDetail';
 }

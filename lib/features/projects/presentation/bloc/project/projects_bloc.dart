@@ -1,7 +1,7 @@
 import 'package:devflow/core/network/error/failures.dart';
 import 'package:devflow/features/projects/domain/usecases/get_projects_usecase.dart';
-import 'package:devflow/features/projects/presentation/bloc/projects_event.dart';
-import 'package:devflow/features/projects/presentation/bloc/projects_state.dart';
+import 'package:devflow/features/projects/presentation/bloc/project/projects_event.dart';
+import 'package:devflow/features/projects/presentation/bloc/project/projects_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

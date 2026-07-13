@@ -2,26 +2,26 @@ import 'package:devflow/core/design/insets/app_insets.dart';
 import 'package:devflow/core/design/radius/app_border_radius.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
-import 'package:devflow/features/projects/presentation/bloc/project/projects_bloc.dart';
-import 'package:devflow/features/projects/presentation/bloc/project/projects_event.dart';
-import 'package:devflow/features/projects/presentation/bloc/project/projects_state.dart';
-import 'package:devflow/features/projects/domain/enum/project_tab.dart';
+import 'package:devflow/features/projects/domain/enum/project_detail_tab.dart';
+import 'package:devflow/features/projects/presentation/bloc/project-detail/project_detail_bloc.dart';
+import 'package:devflow/features/projects/presentation/bloc/project-detail/project_detail_event.dart';
+import 'package:devflow/features/projects/presentation/bloc/project-detail/project_detail_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProjectsTabWidget extends StatelessWidget {
-  const ProjectsTabWidget({super.key});
+class ProjectDetailTabBar extends StatelessWidget {
+  const ProjectDetailTabBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     final tabs = const [
-      ('All', ProjectTab.all),
-      ('Active', ProjectTab.active),
-      ('Completed', ProjectTab.completed),
-      ('Archived', ProjectTab.archived),
+      ('Overview', ProjectDetailTab.overview),
+      ('Tasks', ProjectDetailTab.tasks),
+      ('Files', ProjectDetailTab.files),
+      ('Notes', ProjectDetailTab.notes),
     ];
 
-    return BlocBuilder<ProjectsBloc, ProjectsState>(
+    return BlocBuilder<ProjectDetailBloc, ProjectDetailState>(
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -33,7 +33,9 @@ class ProjectsTabWidget extends StatelessWidget {
 
             return InkWell(
               onTap: () {
-                context.read<ProjectsBloc>().add(ProjectTabChanged(tab));
+                context.read<ProjectDetailBloc>().add(
+                  ProjectDetailTabChanged(tab),
+                );
               },
               borderRadius: AppBorderRadius.sm,
               child: AnimatedContainer(

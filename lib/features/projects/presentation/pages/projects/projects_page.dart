@@ -1,7 +1,7 @@
 import 'package:devflow/app/di/service_locator.dart';
-import 'package:devflow/features/projects/presentation/bloc/projects_bloc.dart';
-import 'package:devflow/features/projects/presentation/bloc/projects_event.dart';
-import 'package:devflow/features/projects/presentation/pages/projects_view.dart';
+import 'package:devflow/features/projects/presentation/bloc/project/projects_bloc.dart';
+import 'package:devflow/features/projects/presentation/bloc/project/projects_event.dart';
+import 'package:devflow/features/projects/presentation/pages/projects/projects_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

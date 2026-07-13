@@ -57,7 +57,10 @@ import '../../features/projects/domain/repositories/project_repository.dart'
     as _i338;
 import '../../features/projects/domain/usecases/get_projects_usecase.dart'
     as _i393;
-import '../../features/projects/presentation/bloc/projects_bloc.dart' as _i977;
+import '../../features/projects/presentation/bloc/project-detail/project_detail_bloc.dart'
+    as _i145;
+import '../../features/projects/presentation/bloc/project/projects_bloc.dart'
+    as _i707;
 import '../bloc/network/network_bloc.dart' as _i849;
 import 'module/register_core.dart' as _i927;
 
@@ -69,6 +72,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerCore = _$RegisterCore();
+    gh.factory<_i145.ProjectDetailBloc>(() => _i145.ProjectDetailBloc());
     gh.lazySingleton<_i895.Connectivity>(() => registerCore.connectivity);
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => registerCore.secureStorage,
@@ -151,8 +155,8 @@ extension GetItInjectableX on _i174.GetIt {
         checkAuthStatusUseCase: gh<_i489.CheckAuthStatusUseCase>(),
       ),
     );
-    gh.factory<_i977.ProjectsBloc>(
-      () => _i977.ProjectsBloc(
+    gh.factory<_i707.ProjectsBloc>(
+      () => _i707.ProjectsBloc(
         getProjectsUseCase: gh<_i393.GetProjectsUseCase>(),
       ),
     );

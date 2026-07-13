@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract final class AppColors {
   static const primary = Color(0xFF6366F1);
-  static const secondary = Color(0xFF885CF6);
+  static const secondary = Colors.blueAccent;
 
   static const success = Color(0xFF10B9B1);
   static const warning = Color(0xFFF59E0B);

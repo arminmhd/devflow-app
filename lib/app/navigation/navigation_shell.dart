@@ -12,7 +12,7 @@ class NavigationShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appBarConfig = getAppBarConfig(shell.currentIndex, context);
+    final appBarConfig = getAppBarConfig(context);
 
     return AppScaffold(
       appBar: AppBarWidget(

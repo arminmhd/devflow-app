@@ -4,7 +4,8 @@ import 'package:devflow/app/router/app_route_names.dart';
 import 'package:devflow/features/auth/presentation/pages/sign-in/sign_in_page.dart';
 import 'package:devflow/features/auth/presentation/pages/sign-up/sign_up_page.dart';
 import 'package:devflow/features/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:devflow/features/projects/presentation/pages/projects_page.dart';
+import 'package:devflow/features/projects/presentation/pages/project-detail/project_detail_page.dart';
+import 'package:devflow/features/projects/presentation/pages/projects/projects_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'app_route_paths.dart';
@@ -43,6 +44,17 @@ class AppRouter {
                 path: AppRoutePaths.projects,
                 name: AppRouteNames.projects,
                 builder: (_, _) => ProjectsPage(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    name: AppRouteNames.projectDetail,
+                    builder: (context, state) {
+                      final id = int.parse(state.pathParameters['id']!);
+
+                      return ProjectDetailPage(projectId: id);
+                    },
+                  ),
+                ],
               ),
             ],
           ),
