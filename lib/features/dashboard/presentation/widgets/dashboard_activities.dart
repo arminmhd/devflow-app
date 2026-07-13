@@ -21,9 +21,7 @@ class DashboardActivities extends StatelessWidget {
             const Spacer(),
 
             InkWell(
-              onTap: () {
-                // TODO: Navigate to full activity page
-              },
+              onTap: () {},
               child: AppText(
                 'View All',
                 style: context.textTheme.bodyLarge?.copyWith(
