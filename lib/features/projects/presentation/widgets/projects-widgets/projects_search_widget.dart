@@ -27,12 +27,14 @@ class _ProjectsSearchWidgetState extends State<ProjectsSearchWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return AppInput(
       controller: controller,
-      fillColor: context.colors.surfaceContainer,
       hint: 'Search projects...',
-      prefixIcon: const Icon(Icons.search),
+      fillColor: colors.surfaceContainer,
       borderRadius: AppBorderRadius.lg,
+      prefixIcon: Icon(Icons.search, color: colors.onSurfaceVariant),
       // onChanged: (value) {
       //   context.read<ProjectsBloc>().add(SearchProjectsEvent(value));
       // },

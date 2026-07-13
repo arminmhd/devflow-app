@@ -14,14 +14,15 @@ class DashboardInfo extends StatelessWidget {
     final user = context.watch<AuthBloc>().state.user;
 
     return DashboardCardTile(
-      color: context.colors.outline,
+      color: context.colors.surfaceContainer,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AppText('Good Morning, ${user?.fullName}'),
 
           AppSpaces.vMd,
 
-          AppText('Lets make today productive'),
+          AppText("Let's make today productive"),
         ],
       ),
     );

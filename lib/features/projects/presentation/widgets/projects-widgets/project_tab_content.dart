@@ -1,4 +1,3 @@
-import 'package:devflow/core/design/colors/app_colors.dart';
 import 'package:devflow/core/design/insets/app_insets.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/widgets/app_text_widget.dart';
@@ -13,6 +12,8 @@ class ProjectTabContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return BlocBuilder<ProjectsBloc, ProjectsState>(
       builder: (context, state) {
         if (state.isLoading) {
@@ -23,9 +24,7 @@ class ProjectTabContent extends StatelessWidget {
           return Center(
             child: AppText(
               state.error!,
-              style: context.textTheme.bodyLarge?.copyWith(
-                color: AppColors.error,
-              ),
+              style: context.textTheme.bodyLarge?.copyWith(color: colors.error),
             ),
           );
         }
@@ -33,16 +32,14 @@ class ProjectTabContent extends StatelessWidget {
         final projects = state.filteredProjects;
 
         if (projects.isEmpty) {
-          return const Center(child: AppText("No projects found"));
+          return const Center(child: AppText('No projects found'));
         }
 
         return ListView.builder(
           padding: AppInsets.sm,
           itemCount: projects.length,
           itemBuilder: (context, index) {
-            final project = projects[index];
-
-            return ProjectsCardTile(project: project);
+            return ProjectsCardTile(project: projects[index]);
           },
         );
       },

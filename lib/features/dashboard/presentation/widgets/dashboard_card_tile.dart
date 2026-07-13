@@ -14,7 +14,7 @@ class DashboardCardTile extends StatelessWidget {
       padding: AppInsets.md,
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: AppShadows.sm,
+        boxShadow: AppShadows.md,
         borderRadius: AppBorderRadius.lg,
         color: color,
       ),

@@ -3,22 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppBottomNavIcon extends StatelessWidget {
-  final String data;
-  final bool isActive;
   const AppBottomNavIcon({
     super.key,
     required this.data,
     required this.isActive,
   });
 
+  final String data;
+  final bool isActive;
+
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Image.asset(
       data,
       width: 20.w,
       height: 20.h,
       fit: BoxFit.cover,
-      color: isActive ? context.colors.secondary : context.colors.onPrimary,
+      color: isActive ? colors.primary : colors.onSurfaceVariant,
     );
   }
 }

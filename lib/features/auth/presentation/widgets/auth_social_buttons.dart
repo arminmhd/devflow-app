@@ -1,4 +1,3 @@
-import 'package:devflow/core/design/colors/app_colors.dart';
 import 'package:devflow/core/design/insets/app_insets.dart';
 import 'package:devflow/core/design/radius/app_border_radius.dart';
 import 'package:flutter/material.dart';
@@ -11,27 +10,37 @@ class AuthSocialButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildSocialButtons(context, 'assets/icons/google.png', null),
-        _buildSocialButtons(context, 'assets/icons/github.png', null),
-        _buildSocialButtons(context, 'assets/icons/apple.png', AppColors.white),
+      children: const [
+        _SocialButton(asset: 'assets/icons/google.png'),
+        _SocialButton(asset: 'assets/icons/github.png'),
+        _SocialButton(asset: 'assets/icons/apple.png', iconColor: Colors.white),
       ],
     );
   }
 }
 
-Widget _buildSocialButtons(BuildContext context, path, color) {
-  return InkWell(
-    child: Container(
-      padding: AppInsets.md,
+class _SocialButton extends StatelessWidget {
+  const _SocialButton({required this.asset, this.iconColor});
 
-      decoration: BoxDecoration(
-        color: AppColors.grey.withValues(alpha: .5),
+  final String asset;
+  final Color? iconColor;
 
-        borderRadius: AppBorderRadius.full,
-        border: Border.all(width: 1, color: AppColors.grey),
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return InkWell(
+      borderRadius: AppBorderRadius.full,
+      onTap: () {},
+      child: Container(
+        padding: AppInsets.md,
+        decoration: BoxDecoration(
+          color: colors.surfaceContainer,
+          borderRadius: AppBorderRadius.full,
+          border: Border.all(color: colors.outline),
+        ),
+        child: Image.asset(asset, width: 35.w, height: 35.h, color: iconColor),
       ),
-      child: Image.asset(path, width: 35.w, height: 35.h, color: color),
-    ),
-  );
+    );
+  }
 }

@@ -12,12 +12,14 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class ProjectsCardTile extends StatelessWidget {
-  final ProjectEntity project;
-
   const ProjectsCardTile({super.key, required this.project});
+
+  final ProjectEntity project;
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return InkWell(
       borderRadius: AppBorderRadius.md,
       onTap: () {
@@ -30,23 +32,23 @@ class ProjectsCardTile extends StatelessWidget {
         margin: AppInsets.vSm,
         padding: AppInsets.md,
         decoration: BoxDecoration(
+          color: colors.surfaceContainer,
           borderRadius: AppBorderRadius.md,
-          color: context.colors.surface,
-          border: Border.all(color: context.colors.outline),
+          border: Border.all(color: colors.outline),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title
             AppText(project.title, style: context.textTheme.titleMedium),
 
             AppSpaces.xs,
 
-            // Description
             AppText(
               project.description,
-              style: context.textTheme.bodyMedium,
               maxLines: 2,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: colors.onSurfaceVariant,
+              ),
             ),
 
             AppSpaces.sm,
@@ -54,7 +56,6 @@ class ProjectsCardTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Color indicator + status
                 Row(
                   children: [
                     Container(
@@ -65,20 +66,24 @@ class ProjectsCardTile extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                     ),
+
                     AppSpaces.sm,
+
                     AppText(
                       project.status.label,
                       style: context.textTheme.bodySmall?.copyWith(
                         color: project.status.color(context),
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
                 ),
 
-                // Created date
                 AppText(
                   _formatDate(project.createdAt),
-                  style: context.textTheme.bodySmall,
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: colors.onSurfaceVariant,
+                  ),
                 ),
               ],
             ),
@@ -88,8 +93,7 @@ class ProjectsCardTile extends StatelessWidget {
     );
   }
 
-  // Format date using intl
   String _formatDate(DateTime date) {
-    return DateFormat("yyyy/MM/dd").format(date);
+    return DateFormat('yyyy/MM/dd').format(date);
   }
 }

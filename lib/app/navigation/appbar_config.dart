@@ -30,7 +30,7 @@ AppBarConfig getAppBarConfig(BuildContext context) {
             height: 25.h,
             child: Image.asset(
               'assets/icons/drawer.png',
-              color: context.colors.onPrimary,
+              color: context.colors.onSurface,
             ),
           ),
         ),

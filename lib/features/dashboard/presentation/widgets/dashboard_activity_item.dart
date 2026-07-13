@@ -8,18 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeActivityItem extends StatelessWidget {
-  final RecentActivityEntity activity;
-
   const HomeActivityItem({super.key, required this.activity});
+
+  final RecentActivityEntity activity;
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Padding(
       padding: AppInsets.vSm,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.history, size: 26.w, color: context.colors.primary),
+          Icon(Icons.history, size: 26.w, color: colors.primary),
 
           AppSpaces.hMd,
 
@@ -32,20 +34,22 @@ class HomeActivityItem extends StatelessWidget {
                 AppSpaces.sm,
 
                 AppText(
-                  activity.description!,
+                  activity.description ?? '',
                   style: context.textTheme.bodyMedium?.copyWith(
-                    color: context.colors.tertiary,
+                    color: colors.onSurfaceVariant,
                   ),
                 ),
               ],
             ),
           ),
 
+          AppSpaces.sm,
+
           AppText(
             Formatters.timeAgo(activity.timestamp),
             align: TextAlign.right,
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: context.colors.tertiary,
+            style: context.textTheme.bodySmall?.copyWith(
+              color: colors.onSurfaceVariant,
             ),
           ),
         ],

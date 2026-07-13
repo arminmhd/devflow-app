@@ -24,7 +24,7 @@ class DevFlowApp extends StatelessWidget {
               routerConfig: AppRouter.router,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
-              themeMode: ThemeMode.system,
+              themeMode: ThemeMode.light,
             ),
           ),
         );

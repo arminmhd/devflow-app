@@ -5,28 +5,56 @@ ColorScheme get lightColorScheme {
   return ColorScheme(
     brightness: Brightness.light,
 
+    // Brand
     primary: AppColors.primary,
-    onPrimary: Colors.black,
+    onPrimary: Colors.white,
 
     secondary: AppColors.secondary,
-    onSecondary: Colors.black,
+    onSecondary: Colors.white,
 
-    tertiary: AppColors.grey,
-    onTertiary: Colors.black,
+    tertiary: const Color(0xFF8B5CF6),
+    onTertiary: Colors.white,
 
+    // Error
     error: AppColors.error,
-    onError: Colors.black,
+    onError: Colors.white,
 
-    surface: AppColors.white,
+    // Surface
+    surface: Colors.white,
     onSurface: AppColors.black,
 
-    surfaceContainerHighest: AppColors.white.withValues(alpha: 0.9),
-    surfaceContainer: AppColors.white.withValues(alpha: 0.8),
+    surfaceContainerLowest: const Color(0xFFFFFFFF),
+    surfaceContainerLow: const Color(0xFFF8FAFC),
+    surfaceContainer: const Color(0xFFF1F5F9),
+    surfaceContainerHigh: const Color(0xFFE2E8F0),
+    surfaceContainerHighest: const Color(0xFFCBD5E1),
 
-    outline: AppColors.grey.withValues(alpha: 0.4),
-    shadow: Colors.black.withValues(alpha: 0.1),
+    // Outline
+    outline: const Color(0xFFCBD5E1),
+    outlineVariant: const Color(0xFFE2E8F0),
 
-    secondaryContainer: AppColors.warning,
-    tertiaryContainer: AppColors.success,
+    // Shadow
+    shadow: Colors.black12,
+
+    // Containers
+    primaryContainer: const Color(0xFFE0E7FF),
+    onPrimaryContainer: const Color(0xFF312E81),
+
+    secondaryContainer: const Color(0xFFCFFAFE),
+    onSecondaryContainer: const Color(0xFF164E63),
+
+    tertiaryContainer: const Color(0xFFEDE9FE),
+    onTertiaryContainer: const Color(0xFF5B21B6),
+
+    errorContainer: const Color(0xFFFEE2E2),
+    onErrorContainer: const Color(0xFF7F1D1D),
+
+    // Other
+    inverseSurface: const Color(0xFF1E293B),
+    onInverseSurface: Colors.white,
+
+    inversePrimary: const Color(0xFF818CF8),
+
+    scrim: Colors.black54,
   );
 }

@@ -1,3 +1,4 @@
+import 'package:devflow/core/design/colors/app_colors.dart';
 import 'package:devflow/core/extension/app_extensions.dart';
 import 'package:devflow/core/utils/formatter.dart';
 import 'package:devflow/features/dashboard/presentation/widgets/dashboard_grid_item.dart';
@@ -21,32 +22,35 @@ class DashboardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       DashboardGridItem(
-        color: context.colors.outline.withValues(alpha: .20),
+        color: context.colors.surfaceContainer,
         title: projectsCount.toString(),
         subTitle: 'Active projects',
         icon: Icons.list_alt,
-        iconColor: context.colors.outlineVariant,
+        iconColor: context.colors.primary,
       ),
+
       DashboardGridItem(
-        color: context.colors.secondaryContainer.withValues(alpha: .20),
+        color: context.colors.surfaceContainer,
         title: Formatters.number(tasksToday),
         subTitle: "Today's Tasks",
         icon: Icons.task_alt,
-        iconColor: context.colors.secondaryContainer,
+        iconColor: context.colors.secondary,
       ),
+
       DashboardGridItem(
-        color: context.colors.tertiaryContainer.withValues(alpha: .20),
+        color: context.colors.surfaceContainer,
         title: Formatters.time(totalTime),
         subTitle: "Time Today",
         icon: Icons.timer,
-        iconColor: context.colors.tertiaryContainer,
+        iconColor: AppColors.success,
       ),
+
       DashboardGridItem(
-        color: context.colors.secondary.withValues(alpha: 0.20),
+        color: context.colors.surfaceContainer,
         title: Formatters.income(totalIncome),
         subTitle: "Income This Month",
         icon: Icons.attach_money,
-        iconColor: context.colors.secondary,
+        iconColor: AppColors.warning,
       ),
     ];
 
