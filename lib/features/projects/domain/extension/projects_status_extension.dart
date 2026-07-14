@@ -27,4 +27,30 @@ extension ProjectStatusExtension on ProjectStatus {
         return context.colors.onSurfaceVariant;
     }
   }
+
+  double progressValue(int progress) {
+    switch (this) {
+      case ProjectStatus.active:
+        return progress / 100;
+
+      case ProjectStatus.completed:
+        return 100;
+
+      case ProjectStatus.archived:
+        return progress / 100;
+    }
+  }
+
+  String progressPercent(int progress) {
+    switch (this) {
+      case ProjectStatus.active:
+        return '$progress%';
+
+      case ProjectStatus.completed:
+        return "100%";
+
+      case ProjectStatus.archived:
+        return '$progress%';
+    }
+  }
 }

@@ -12,7 +12,9 @@ ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) => ProjectModel(
   subtitle: json['subtitle'] as String,
   status: json['status'] as String,
   color: json['color'] as String,
-  progress: (json['progress'] as num).toInt(),
+  progress: (json['progress'] as num?)?.toInt() ?? 0,
+  tasksCount: (json['tasks_count'] as num?)?.toInt() ?? 0,
+  completedTasks: (json['completed_tasks'] as num?)?.toInt() ?? 0,
   createdAt: DateTime.parse(json['created_at'] as String),
 );
 
@@ -24,5 +26,7 @@ Map<String, dynamic> _$ProjectModelToJson(ProjectModel instance) =>
       'status': instance.status,
       'color': instance.color,
       'progress': instance.progress,
+      'tasks_count': instance.tasksCount,
+      'completed_tasks': instance.completedTasks,
       'created_at': instance.createdAt.toIso8601String(),
     };

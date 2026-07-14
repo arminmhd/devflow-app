@@ -36,6 +36,7 @@ class ProjectTabContent extends StatelessWidget {
         }
 
         return ListView.builder(
+          reverse: true,
           padding: AppInsets.sm,
           itemCount: projects.length,
           itemBuilder: (context, index) {

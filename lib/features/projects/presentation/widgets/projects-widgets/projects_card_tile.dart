@@ -87,6 +87,42 @@ class ProjectsCardTile extends StatelessWidget {
                 ),
               ],
             ),
+
+            AppSpaces.md,
+
+            Row(
+              children: [
+                Expanded(
+                  child: LinearProgressIndicator(
+                    value: project.status.progressValue(project.progress),
+                    borderRadius: AppBorderRadius.full,
+                    minHeight: 6.h,
+                    backgroundColor: colors.surface,
+                    color: project.status.color(context),
+                  ),
+                ),
+
+                AppSpaces.md,
+
+                SizedBox(
+                  width: 40,
+                  child: AppText(
+                    project.status.progressPercent(project.progress),
+                    align: TextAlign.end,
+                    style: context.textTheme.bodySmall,
+                  ),
+                ),
+              ],
+            ),
+
+            AppSpaces.sm,
+
+            AppText(
+              '${project.completedTasks}/${project.tasksCount} Tasks',
+              style: context.textTheme.bodySmall?.copyWith(
+                color: colors.onSurfaceVariant,
+              ),
+            ),
           ],
         ),
       ),
@@ -94,6 +130,6 @@ class ProjectsCardTile extends StatelessWidget {
   }
 
   String _formatDate(DateTime date) {
-    return DateFormat('yyyy/MM/dd').format(date);
+    return DateFormat('MMM d', 'en').format(date);
   }
 }

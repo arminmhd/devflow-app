@@ -8,6 +8,8 @@ class ProjectEntity extends Equatable {
   final ProjectStatus status;
   final String color;
   final int progress;
+  final int tasksCount;
+  final int completedTasks;
   final DateTime createdAt;
 
   const ProjectEntity({
@@ -17,6 +19,8 @@ class ProjectEntity extends Equatable {
     required this.status,
     required this.color,
     required this.progress,
+    required this.tasksCount,
+    required this.completedTasks,
     required this.createdAt,
   });
 
@@ -28,6 +32,8 @@ class ProjectEntity extends Equatable {
     status,
     color,
     progress,
+    tasksCount,
+    completedTasks,
     createdAt,
   ];
 }
